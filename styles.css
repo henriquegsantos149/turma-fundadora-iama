@@ -15,7 +15,7 @@
   --color-bg-deep: #000d14; /* Fundo escuro profundo (Pós IA.MA) */
   --color-bg-dark: #00121c; /* Fundo escuro principal (Pós IA.MA) */
   --color-bg-light: #F2F2F2; /* Fundo off-white da paleta */
-  --color-bg-card: rgba(255, 255, 255, 0.03); /* Cartões escuros translúcidos */
+  --color-bg-card: rgba(0, 20, 30, 0.85); /* Cartões escuros translúcidos */
   
   /* Cores de Texto */
   --color-text-light: #ffffff; /* Texto branco puro para alto contraste */
@@ -1850,35 +1850,41 @@ a {
   color: var(--color-primary);
 }
 
-/* Estilos específicos para o card do CREA (Escuro no fundo claro) */
-.bg-light-layer .bg-crea-dark {
+/* Estilos específicos para o card do CREA e Admissão (Escuro no fundo claro) */
+.bg-light-layer .bg-crea-dark,
+.bg-light-layer .bg-admission-dark {
   background: var(--color-bg-dark) !important; /* Fundo escuro principal #111422 */
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   color: var(--color-text-muted-light) !important;
   box-shadow: var(--shadow-md) !important;
 }
 
-.bg-light-layer .bg-crea-dark h3 {
+.bg-light-layer .bg-crea-dark h3,
+.bg-light-layer .bg-admission-dark h3 {
   color: #ffffff !important;
 }
 
-.bg-light-layer .bg-crea-dark p {
+.bg-light-layer .bg-crea-dark p,
+.bg-light-layer .bg-admission-dark p {
   color: var(--color-text-muted-light) !important;
 }
 
-.bg-light-layer .bg-crea-dark .btn-secondary-outline {
+.bg-light-layer .bg-crea-dark .btn-secondary-outline,
+.bg-light-layer .bg-admission-dark .btn-secondary-outline {
   border-color: var(--color-accent) !important;
   color: var(--color-accent) !important;
   box-shadow: 0 0 10px rgba(41, 167, 217, 0.15) !important;
 }
 
-.bg-light-layer .bg-crea-dark .btn-secondary-outline:hover {
+.bg-light-layer .bg-crea-dark .btn-secondary-outline:hover,
+.bg-light-layer .bg-admission-dark .btn-secondary-outline:hover {
   background-color: rgba(41, 167, 217, 0.08) !important;
   border-color: #ffffff !important;
   color: #ffffff !important;
 }
 
-.bg-light-layer .bg-crea-dark strong {
+.bg-light-layer .bg-crea-dark strong,
+.bg-light-layer .bg-admission-dark strong {
   color: var(--color-primary) !important; /* Destaque em ciano vibrante para leitura no fundo escuro */
 }
 
