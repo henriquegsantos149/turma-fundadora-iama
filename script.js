@@ -427,8 +427,6 @@ function initFormControls() {
   });
 
   // Form Submission
-  const REDIRECT_TALLY_LINK = "https://tally.so/r/D4MLGb";
-
   form.addEventListener('submit', (e) => {
     const validation = validatePhone(phoneInput.value);
     if (!validation.isValid) {
@@ -445,59 +443,11 @@ function initFormControls() {
 
     // Loading State
     submitBtn.disabled = true;
-    const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i data-lucide="loader" class="animate-spin"></i> Registrando sua vaga...';
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
-    // Prepare Lead Data
-    const formData = new FormData(form);
-    const leadData = {
-      name: formData.get('nome'),
-      email: formData.get('email'),
-      whatsapp: formData.get('telefone'),
-      graduation: formData.get('graduacao'),
-      education_area: formData.get('area_formacao') || ''
-    };
-
-    // Grab UTM params from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectUrl = new URL(REDIRECT_TALLY_LINK);
-    
-    urlParams.forEach((val, key) => {
-      const lowerKey = key.toLowerCase();
-      if (lowerKey.startsWith('utm_')) {
-        redirectUrl.searchParams.append(key, val);
-        leadData[lowerKey] = val;
-      }
-    });
-
-    // GTM DataLayer Push
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'formSubmission',
-        formId: 'enrollment-form',
-        leadEmail: leadData.email,
-        leadGraduation: leadData.graduation
-      });
-    }
-
-    // Call subscribe API
-    fetch('/api/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(leadData)
-    })
-    .then(res => {
-      if (!res.ok) {
-        console.warn('API subscription warning.');
-      }
-    })
-    .catch(err => {
-      console.error('Network error during API subscription:', err);
-    })
-    .finally(() => {
+    // Directly transition to the success card (simulated delay for premium feel)
+    setTimeout(() => {
       const card = document.getElementById('inscricao');
       if (card) {
         card.innerHTML = `
@@ -513,7 +463,7 @@ function initFormControls() {
         `;
         if (typeof lucide !== 'undefined') lucide.createIcons();
       }
-    });
+    }, 1000);
   });
 }
 
