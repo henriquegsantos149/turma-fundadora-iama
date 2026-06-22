@@ -417,7 +417,8 @@ a {
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 60px;
 }
 
 .logo-wrapper a {
@@ -498,6 +499,11 @@ a {
 }
 
 @media (max-width: 991px) {
+  .header-container {
+    justify-content: space-between;
+    gap: 0;
+  }
+  
   .nav-menu {
     position: fixed;
     top: 0;
@@ -2120,41 +2126,301 @@ a {
   color: #fff;
 }
 
-.live-horizontal-banner {
-  background: linear-gradient(135deg, rgba(0, 13, 20, 0.9) 0%, rgba(13, 31, 45, 0.95) 100%);
-  border: 1px solid rgba(124, 191, 57, 0.3);
-  border-radius: var(--radius-md);
-  padding: 32px 40px;
-  margin-top: 32px;
+/* ==========================================
+   NOVA SEÇÃO VIP (REDESIGN)
+   ========================================== */
+
+.vip-white-card {
+  padding: 16px 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.vip-eyebrow {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.vip-white-card h2 {
+  color: #1a202c;
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.vip-white-card h2 span {
+  color: var(--color-primary);
+}
+
+.vip-white-card p {
+  color: #4a5568;
+  font-size: 1.05rem;
+  max-width: 700px;
+  margin-bottom: 32px;
+}
+
+.vip-inline-checks {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.vip-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+.vip-check-item i {
+  color: var(--color-primary);
+  width: 18px;
+  height: 18px;
+}
+
+.vip-separator {
+  color: #cbd5e0;
+}
+
+.vip-secure-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #a0aec0;
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
+
+.vip-secure-info i {
+  width: 14px;
+  height: 14px;
+}
+
+.live-horizontal-banner {
+  background: linear-gradient(135deg, rgba(10, 18, 25, 0.95) 0%, rgba(20, 35, 50, 0.98) 100%);
+  border-radius: var(--radius-md);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
   gap: 32px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   text-align: left;
+  position: relative;
+  z-index: 1;
+  padding-top: 48px;
 }
 
-.live-horizontal-banner .event-date {
+.event-date-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
   flex-shrink: 0;
   padding-right: 32px;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.event-date-box {
+  background-color: var(--color-primary);
+  border-radius: 12px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.event-date-box i {
+  color: #fff;
+  width: 32px;
+  height: 32px;
+}
+
+.event-date-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-date-text strong {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.event-date-text span {
+  font-size: 1rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-top: 4px;
 }
 
 .live-horizontal-banner .event-desc {
   flex-grow: 1;
 }
 
+.event-desc .live-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.event-desc .live-eyebrow i {
+  width: 16px;
+  height: 16px;
+  animation: pulse-dot 2s infinite;
+}
+
+.live-horizontal-banner .event-icon-right {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.live-horizontal-banner .event-icon-right i {
+  width: 64px;
+  height: 64px;
+  color: #fff;
+}
+
+.vip-benefits-footer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+  padding: 0 24px;
+}
+
+.vip-benefit-col {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.vip-benefit-col-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(124, 191, 57, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.bg-light-layer .vip-benefit-col-text h4 {
+  color: #1a202c;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.bg-light-layer .vip-benefit-col-text p {
+  color: #4a5568;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 @media (max-width: 768px) {
+  .vip-white-card {
+    padding: 16px 0 24px 0;
+  }
+  .vip-white-card h2 {
+    font-size: 2rem;
+  }
   .live-horizontal-banner {
     flex-direction: column;
     text-align: center;
     padding: 24px;
+    padding-top: 40px;
     gap: 16px;
   }
-  .live-horizontal-banner .event-date {
+  .event-date-group {
+    flex-direction: column;
     padding-right: 0;
-    padding-bottom: 16px;
+    padding-bottom: 24px;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .event-desc .live-eyebrow {
+    justify-content: center;
+  }
+  .vip-benefits-footer {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .vip-benefit-col {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .live-horizontal-banner .event-icon-right {
+    display: none;
+  }
+}
+
+/* ==========================================
+   STICKY CTA BAR
+   ========================================== */
+
+.sticky-cta-bar {
+  position: fixed;
+  bottom: -150px; /* Oculto inicialmente */
+  right: 24px;
+  width: auto;
+  background: transparent;
+  backdrop-filter: none;
+  border-top: none;
+  z-index: 9999;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sticky-cta-bar.visible {
+  bottom: 24px;
+}
+
+.sticky-cta-bar .btn {
+  border-radius: 50px;
+  padding: 16px 24px;
+  box-shadow: 0 10px 30px rgba(124, 191, 57, 0.4);
+}
+
+@media (max-width: 768px) {
+  .sticky-cta-bar {
+    right: 16px;
+  }
+  
+  .sticky-cta-bar.visible {
+    bottom: 16px;
+  }
+
+  .sticky-cta-bar .btn {
+    width: auto;
+    justify-content: center;
   }
 }

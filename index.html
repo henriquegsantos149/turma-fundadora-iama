@@ -112,9 +112,7 @@
           <li><a href="#faq" class="nav-link">Dúvidas</a></li>
         </ul>
       </nav>
-      <div class="header-cta">
-        <a href="#inscricao" class="btn btn-secondary-outline btn-sm">Garantir Vaga</a>
-      </div>
+
       <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Abrir Menu">
         <i data-lucide="menu"></i>
       </button>
@@ -159,14 +157,6 @@
               style="display: inline-flex; align-items: center; gap: 10px;">
               Quero Garantir Minha Vaga de Pioneiro <i data-lucide="arrow-right"></i>
             </a>
-            
-            <div class="live-alert reveal delay-1">
-              <i data-lucide="calendar-clock" class="live-alert-icon"></i>
-              <div class="live-alert-text">
-                <strong>Live de Lançamento:</strong> 30/06 às 20h<br>
-                Acesso aos detalhes da oferta exclusiva para a Turma Fundadora.
-              </div>
-            </div>
           </div>
 
           <div class="hero-social-proof">
@@ -182,28 +172,77 @@
 
     <!-- Group VIP Section -->
     <section class="section-padding group-vip-section bg-light-layer">
-      <div class="container max-w-lg text-center reveal">
-        <div class="vip-card-box glassmorphism">
-          <div class="card-glow-top"></div>
-          <div class="vip-icon-wrapper"
-            style="background-color: rgba(124, 191, 57, 0.1); border: 1px solid rgba(124, 191, 57, 0.2); color: var(--color-primary);">
-            <i data-lucide="users"></i>
-          </div>
-          <h2>Acesso Prioritário ao Grupo VIP</h2>
+      <div class="container text-center reveal" style="max-width: 960px;">
+        
+        <!-- White Card -->
+        <div class="vip-white-card">
+          <h2>Acesso Prioritário <br>ao <span>Grupo VIP</span></h2>
           <p>Após realizar sua pré-inscrição, você terá acesso ao nosso grupo exclusivo no WhatsApp. É por lá que enviaremos o link de acesso à nossa transmissão especial.</p>
-          <p style="margin-bottom: 24px; font-size: 0.95rem; color: var(--color-text-muted);">As vagas com desconto histórico são limitadas e preenchidas por ordem de chegada durante a Live.</p>
-          <a href="#hero" class="btn btn-primary btn-lg btn-glow">Aplicar para ser Aluno Fundador</a>
+          
+
+
+
         </div>
 
+        <!-- Dark Banner -->
         <div class="live-horizontal-banner reveal delay-1">
-          <div class="event-date">
-            30/06 <span>às 20h</span>
+          <div class="event-date-group">
+            <div class="event-date-box">
+              <i data-lucide="calendar"></i>
+            </div>
+            <div class="event-date-text">
+              <strong>30/06</strong>
+              <span>às 20h</span>
+            </div>
           </div>
+
           <div class="event-desc">
-            <strong>Live de Lançamento</strong><br>
-            Neste dia revelaremos o bônus de pioneiro e liberaremos o <strong>link de matrícula com o maior desconto da história</strong> da Pós IA.MA.
+            <div class="live-eyebrow">
+              <i data-lucide="radio"></i> Live de Lançamento
+            </div>
+            <p style="color: rgba(255, 255, 255, 0.85); line-height: 1.5; font-size: 1.05rem;">
+              Neste dia revelaremos o bônus de pioneiro e liberaremos o <strong style="color: #fff;">link de matrícula com o maior desconto da história</strong> da Pós IA.MA.
+            </p>
+          </div>
+
+          <div class="event-icon-right">
+            <i data-lucide="video"></i>
           </div>
         </div>
+
+        <!-- Benefits Footer -->
+        <div class="vip-benefits-footer reveal delay-2">
+          <div class="vip-benefit-col">
+            <div class="vip-benefit-col-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="vip-benefit-col-text">
+              <h4>Acesso Prioritário</h4>
+              <p>Seja o primeiro a garantir sua vaga com desconto.</p>
+            </div>
+          </div>
+          <div class="vip-benefit-col">
+            <div class="vip-benefit-col-icon">
+              <i data-lucide="tags"></i>
+            </div>
+            <div class="vip-benefit-col-text">
+              <h4>Maior Desconto</h4>
+              <p>Condições exclusivas apenas para Alunos Fundadores.</p>
+            </div>
+          </div>
+          <div class="vip-benefit-col">
+            <div class="vip-benefit-col-icon">
+              <i data-lucide="users"></i>
+            </div>
+            <div class="vip-benefit-col-text">
+              <h4>Comunidade VIP</h4>
+              <p>Conteúdo, networking e suporte no WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </section>
 
@@ -1030,6 +1069,13 @@
         Aplicada ao Meio Ambiente (Pós IA.MA). Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta-bar" id="sticky-cta">
+    <a href="#inscricao" class="btn btn-primary btn-glow" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 50px; padding-left: 24px; padding-right: 24px; box-shadow: 0 10px 30px rgba(124, 191, 57, 0.4);">
+      Garantir Minha Vaga <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+    </a>
+  </div>
 
   <script type="module" src="/script.js"></script>
 </body>
