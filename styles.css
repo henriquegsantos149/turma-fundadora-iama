@@ -1849,7 +1849,6 @@ a {
 
 /* Ícones e Envelopes de Ícones nas dobras claras */
 .bg-light-layer .detail-icon,
-.bg-light-layer .v-icon,
 .bg-light-layer .vip-icon-wrapper {
   background-color: rgba(41, 167, 217, 0.08);
   border: 1px solid rgba(41, 167, 217, 0.25);
