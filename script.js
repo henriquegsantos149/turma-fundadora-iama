@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousels();
   initLightbox();
   initFormControls();
-  initAdmission3DScroll();
 });
 
 // 1. Sticky Header
@@ -512,50 +511,4 @@ function initSmoothScroll() {
       }
     });
   });
-}
-
-// 9. 3D Scroll Animation for Admission Section (Aceternity UI replica)
-function initAdmission3DScroll() {
-  const container = document.querySelector('.admission-scroll-container');
-  const card = document.querySelector('.admission-scroll-card');
-  const header = document.querySelector('.admission-scroll-header');
-
-  if (!container || !card || !header) return;
-
-  const handleScroll = () => {
-    const rect = container.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-
-    // Check if container is in or close to viewport to optimize rendering
-    if (rect.bottom < 0 || rect.top > viewportHeight) return;
-
-    // Calculate scroll progress (0 when top is at bottom of viewport, 1 when bottom is at top of viewport)
-    const totalDist = rect.height + viewportHeight;
-    const currentPos = viewportHeight - rect.top;
-    let progress = currentPos / totalDist;
-    progress = Math.max(0, Math.min(1, progress));
-
-    // Mapping values:
-    // rotateX: 20deg to 0deg (progress 0 to 1)
-    const rotateX = 20 - (progress * 20);
-
-    // scale: [1.05, 1] on desktop, [0.75, 0.95] on mobile
-    const isMobile = window.innerWidth <= 768;
-    const startScale = isMobile ? 0.75 : 1.05;
-    const endScale = isMobile ? 0.95 : 1.0;
-    const scale = startScale + (progress * (endScale - startScale));
-
-    // translateY (on header text): 0 to -80px
-    const translateY = -80 * progress;
-
-    // Apply transforms smoothly using requestAnimationFrame for high performance
-    window.requestAnimationFrame(() => {
-      card.style.transform = `rotateX(${rotateX}deg) scale(${scale})`;
-      header.style.transform = `translateY(${translateY}px)`;
-    });
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleScroll, { passive: true });
-  handleScroll(); // Initial run
 }
