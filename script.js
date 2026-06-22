@@ -596,10 +596,12 @@ class ChatbotApplication {
 
   scrollToBottom() {
     const wrapper = document.querySelector('.chatbot-messages-wrapper');
-    wrapper.scrollTo({
+    setTimeout(() => {
+      wrapper.scrollTo({
       top: wrapper.scrollHeight,
       behavior: 'smooth'
-    });
+      });
+    }, 50);
   }
 
   showTyping() {
