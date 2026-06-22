@@ -11,9 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCarousels();
   initLightbox();
-
-  // Initialize Chatbot
   const chatbot = new ChatbotApplication();
+  initStickyCTA();
 });
 
 // 1. Sticky Header
@@ -797,19 +796,6 @@ class ChatbotApplication {
 }
 
 
-// Global Custom styling injector for spinning animations
-const inlineStyle = document.createElement('style');
-inlineStyle.textContent = `
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  .animate-spin {
-    display: inline-block;
-    animation: spin 1s linear infinite;
-  }
-`;
-document.head.appendChild(inlineStyle);
 
 // 8. Smooth Scroll without Hash in URL
 function initSmoothScroll() {
@@ -841,4 +827,31 @@ function initSmoothScroll() {
       }
     });
   });
+}
+
+// 9. Sticky CTA Observer
+function initStickyCTA() {
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroSection = document.getElementById('hero');
+  
+  if (!stickyCta || !heroSection) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // If hero section is not intersecting (i.e. out of view), show sticky CTA
+      if (!entry.isIntersecting) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
+  }, observerOptions);
+
+  observer.observe(heroSection);
 }

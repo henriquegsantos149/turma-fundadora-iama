@@ -97,7 +97,7 @@
   <header id="main-header" class="site-header">
     <div class="container header-container">
       <div class="logo-wrapper">
-        <a href="#hero">
+        <a href="#">
           <img src="/logo.webp" alt="Logo Pós IA.MA" style="height: 52px; width: auto;" class="site-logo-icon">
         </a>
       </div>
@@ -112,9 +112,7 @@
           <li><a href="#faq" class="nav-link">Dúvidas</a></li>
         </ul>
       </nav>
-      <div class="header-cta">
-        <a href="#inscricao" class="btn btn-secondary-outline btn-sm chatbot-trigger">Faça a sua aplicação!</a>
-      </div>
+
       <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Abrir Menu">
         <i data-lucide="menu"></i>
       </button>
@@ -154,11 +152,11 @@
             ambiental, com condições históricas de lançamento e acompanhamento próximo dos coordenadores.
           </p>
 
-          <div style="margin-top: 8px; margin-bottom: 48px;">
-            <button type="button" id="inscricao" class="btn btn-primary btn-lg btn-glow pulse-glow chatbot-trigger"
-              style="display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer; font-family: inherit;">
-              Faça a sua aplicação! <i data-lucide="arrow-right"></i>
-            </button>
+          <div style="margin-top: 8px; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center;">
+            <a href="#" id="inscricao" class="btn btn-primary chatbot-trigger btn-lg btn-glow pulse-glow"
+              style="display: inline-flex; align-items: center; gap: 10px;">
+              Quero Garantir Minha Vaga de Pioneiro <i data-lucide="arrow-right"></i>
+            </a>
           </div>
 
           <div class="hero-social-proof">
@@ -174,26 +172,77 @@
 
     <!-- Group VIP Section -->
     <section class="section-padding group-vip-section bg-light-layer">
-      <div class="container max-w-lg text-center reveal">
-        <div class="vip-card-box glassmorphism">
-          <div class="card-glow-top"></div>
-          <div class="vip-icon-wrapper"
-            style="background-color: rgba(124, 191, 57, 0.1); border: 1px solid rgba(124, 191, 57, 0.2); color: var(--color-primary);">
-            <i data-lucide="users"></i>
-          </div>
-          <h2>Acesso Prioritário ao Grupo VIP</h2>
-          <p>Após realizar sua pré-inscrição acima, você terá acesso ao nosso grupo exclusivo no WhatsApp. Por lá você
-            receberá:</p>
-          <ul class="vip-benefits-list">
-            <li><i data-lucide="check" style="color: var(--color-primary);"></i> O link exclusivo de matrícula com o
-              maior desconto da história da Pós IA.MA.</li>
-            <li><i data-lucide="check" style="color: var(--color-primary);"></i> Acesso direto à grade de disciplinas,
-              bônus de pioneiro e cronogramas.</li>
-            <li><i data-lucide="check" style="color: var(--color-primary);"></i> Suporte prioritário da coordenação para
-              tirar dúvidas de carreira e projetos.</li>
-          </ul>
-          <a href="#inscricao" class="btn btn-primary btn-lg btn-glow chatbot-trigger">Faça a sua aplicação!</a>
+      <div class="container text-center reveal" style="max-width: 960px;">
+        
+        <!-- White Card -->
+        <div class="vip-white-card">
+          <h2>Acesso Prioritário <br>ao <span>Grupo VIP</span></h2>
+          <p>Após realizar sua pré-inscrição, você terá acesso ao nosso grupo exclusivo no WhatsApp. É por lá que enviaremos o link de acesso à nossa transmissão especial.</p>
+          
+
+
+
         </div>
+
+        <!-- Dark Banner -->
+        <div class="live-horizontal-banner reveal delay-1">
+          <div class="event-date-group">
+            <div class="event-date-box">
+              <i data-lucide="calendar"></i>
+            </div>
+            <div class="event-date-text">
+              <strong>30/06</strong>
+              <span>às 20h</span>
+            </div>
+          </div>
+
+          <div class="event-desc">
+            <div class="live-eyebrow">
+              <i data-lucide="radio"></i> Live de Lançamento
+            </div>
+            <p style="color: rgba(255, 255, 255, 0.85); line-height: 1.5; font-size: 1.05rem;">
+              Neste dia revelaremos o bônus de pioneiro e liberaremos o <strong style="color: #fff;">link de matrícula com o maior desconto da história</strong> da Pós IA.MA.
+            </p>
+          </div>
+
+          <div class="event-icon-right">
+            <i data-lucide="video"></i>
+          </div>
+        </div>
+
+        <!-- Benefits Footer -->
+        <div class="vip-benefits-footer reveal delay-2">
+          <div class="vip-benefit-col">
+            <div class="vip-benefit-col-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="vip-benefit-col-text">
+              <h4>Acesso Prioritário</h4>
+              <p>Seja o primeiro a garantir sua vaga com desconto.</p>
+            </div>
+          </div>
+          <div class="vip-benefit-col">
+            <div class="vip-benefit-col-icon">
+              <i data-lucide="tags"></i>
+            </div>
+            <div class="vip-benefit-col-text">
+              <h4>Maior Desconto</h4>
+              <p>Condições exclusivas apenas para Alunos Fundadores.</p>
+            </div>
+          </div>
+          <div class="vip-benefit-col">
+            <div class="vip-benefit-col-icon">
+              <i data-lucide="users"></i>
+            </div>
+            <div class="vip-benefit-col-text">
+              <h4>Comunidade VIP</h4>
+              <p>Conteúdo, networking e suporte no WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </section>
 
@@ -574,16 +623,7 @@
             <p>Responda a algumas perguntas breves sobre sua formação acadêmica, objetivos profissionais e interesse
               prático no uso da IA.</p>
           </div>
-          <!-- Step 3 -->
-          <div class="detail-card glassmorphism">
-            <div class="detail-icon"
-              style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="file-search"></i>
-            </div>
-            <h3>3. Análise de Currículo</h3>
-            <p>Nossa equipe pedagógica analisará seu currículo (CV) e respostas para confirmar se você atende aos
-              pré-requisitos para receber bônus e mentorias exclusivas.</p>
-          </div>
+
         </div>
 
         <!-- Callout Box (Dark inside Light section) -->
@@ -603,7 +643,7 @@
               style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
               <img src="/logo-ambientalpro.webp" alt="Logo Ambiental Pro" class="partnership-logos"
                 style="max-height: 80px; width: auto;">
-              <a href="#inscricao" class="btn btn-primary btn-lg btn-glow chatbot-trigger">Faça a sua aplicação!</a>
+              <a href="#" class="btn btn-primary chatbot-trigger btn-lg btn-glow">Quero Aplicar para a Turma</a>
             </div>
           </div>
         </div>
@@ -1008,14 +1048,13 @@
     </section>
 
     <!-- Final Call to Action Section -->
-    <section class="section-padding bg-dark-layer text-center" style="border-top: 1px solid var(--color-border);">
+    <section class="section-padding bg-light-layer text-center" style="border-top: 1px solid rgba(0,0,0,0.05);">
       <div class="container max-w-lg">
-        <div class="vip-card-box glassmorphism" style="padding: 50px 30px;">
-          <div class="card-glow-top"></div>
-          <h2 style="font-size: 2.2rem; margin-bottom: 20px;" class="gradient-text">Seja um Pioneiro da Pós IA.MA</h2>
-          <p style="margin-bottom: 30px; font-size: 1.1rem;">Garanta sua vaga de fundador com desconto exclusivo e
+        <div style="padding: 50px 30px; background: #ffffff; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); border: 1px solid rgba(0,0,0,0.05);">
+          <h2 style="font-size: 2.2rem; margin-bottom: 20px; color: #1a202c; font-weight: 800; line-height: 1.2;">Seja um Pioneiro da <span style="color: var(--color-secondary);">Pós IA.MA</span></h2>
+          <p style="margin-bottom: 30px; font-size: 1.1rem; color: #4a5568;">Garanta sua vaga de fundador com desconto exclusivo e
             lidere a revolução da Inteligência Artificial no meio ambiente.</p>
-          <a href="#inscricao" class="btn btn-primary btn-lg btn-glow chatbot-trigger">Faça a sua aplicação! <i
+          <a href="#" class="btn btn-primary chatbot-trigger btn-lg btn-glow" style="box-shadow: 0 10px 30px rgba(124, 191, 57, 0.4);">Garantir Minha Vaga de Pioneiro <i
               data-lucide="arrow-right"></i></a>
         </div>
       </div>
@@ -1030,8 +1069,15 @@
     </div>
   </footer>
 
+  <!-- Sticky CTA -->
+  <div class="sticky-cta-bar" id="sticky-cta">
+    <a href="#" class="btn btn-primary chatbot-trigger btn-glow" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 50px; padding-left: 24px; padding-right: 24px; box-shadow: 0 10px 30px rgba(124, 191, 57, 0.4);">
+      Garantir Minha Vaga <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+    </a>
+  </div>
+
   <!-- Floating CTA -->
-  <button id="floating-cta" class="btn btn-primary btn-glow pulse-glow chatbot-trigger" style="position: fixed; bottom: 20px; right: 20px; z-index: 99; display: flex; align-items: center; gap: 8px; border-radius: 50px; padding: 12px 24px; font-weight: 600; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(124, 191, 57, 0.4); font-family: inherit;">
+  <button id="floating-cta" class="btn btn-primary chatbot-trigger btn-glow pulse-glow chatbot-trigger" style="position: fixed; bottom: 20px; right: 20px; z-index: 99; display: flex; align-items: center; gap: 8px; border-radius: 50px; padding: 12px 24px; font-weight: 600; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(124, 191, 57, 0.4); font-family: inherit;">
     Faça a sua aplicação! <i data-lucide="message-square"></i>
   </button>
 
@@ -1061,6 +1107,7 @@
     </div>
   </div>
 
+  
   <script type="module" src="/script.js"></script>
 </body>
 
