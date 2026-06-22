@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCarousels();
   initLightbox();
-  initFormControls();
+
+  // Initialize Chatbot
+  const chatbot = new ChatbotApplication();
 });
 
 // 1. Sticky Header
@@ -348,124 +350,452 @@ function initLightbox() {
   });
 }
 
-// 7. Form Controls (Graduation Toggle, Phone Validation, GTM Tracking, Redirection)
-function initFormControls() {
-  const form = document.getElementById('enrollment-form');
-  const gradSelect = document.getElementById('user-graduation');
-  const areaGroup = document.getElementById('education-area-group');
-  const areaInput = document.getElementById('user-education-area');
-  const phoneInput = document.getElementById('user-whatsapp');
-
-  if (!form || !gradSelect || !areaGroup || !phoneInput) return;
-
-  // Initial State for graduation area
-  areaGroup.classList.add('hidden');
-  if (areaInput) areaInput.removeAttribute('required');
-
-  // Show/Hide Area Input based on select value
-  gradSelect.addEventListener('change', () => {
-    if (gradSelect.value === 'Sim') {
-      areaGroup.classList.remove('hidden');
-      if (areaInput) areaInput.setAttribute('required', 'required');
-    } else {
-      areaGroup.classList.add('hidden');
-      if (areaInput) {
-        areaInput.removeAttribute('required');
-        areaInput.value = ''; // Reset value
+// 7. Chatbot Application Logic
+class ChatbotApplication {
+  constructor() {
+    this.modal = document.getElementById('chatbot-modal');
+    this.closeBtn = document.getElementById('close-chatbot');
+    this.messagesContainer = document.getElementById('chatbot-messages');
+    this.inputArea = document.getElementById('chatbot-input-area');
+    this.triggers = document.querySelectorAll('.chatbot-trigger');
+    
+    this.userData = {};
+    this.currentStep = 0;
+    this.isTyping = false;
+    
+    // Configuração do fluxo de conversa
+    this.flow = [
+      {
+        id: 'welcome',
+        botMessage: "Olá! Sou o agente virtual da Ambiental Pro responsável pela seleção da Turma Fundadora da Pós IA.MA. Para garantir que nossos alunos tenham o melhor aproveitamento, realizamos uma breve análise de perfil.",
+        delay: 500
+      },
+      {
+        id: 'name',
+        botMessage: "Vamos começar! Qual é o seu nome completo?",
+        inputType: 'text',
+        placeholder: 'Digite seu nome...',
+        fieldId: 'firstName', // ActiveCampaign padrão (primeiro nome) mas enviaremos completo na variavel
+        delay: 800
+      },
+      {
+        id: 'email',
+        botMessage: "Prazer, {name}! Qual é o seu melhor e-mail para contato?",
+        inputType: 'email',
+        placeholder: 'exemplo@email.com',
+        fieldId: 'email',
+        delay: 500
+      },
+      {
+        id: 'phone',
+        botMessage: "Ótimo. E qual é o seu WhatsApp (com DDD)?",
+        inputType: 'tel',
+        placeholder: '11 99999-9999',
+        fieldId: 'phone',
+        delay: 500
+      },
+      {
+        id: 'graduacao',
+        botMessage: "Você já possui alguma formação de ensino superior completa?",
+        inputType: 'buttons',
+        options: ["Sim", "Não"],
+        fieldId: '753', // UTM Possui Graduacao
+        delay: 500
+      },
+      {
+        id: 'area_formacao',
+        botMessage: "Qual é a sua área de formação principal?",
+        inputType: 'text',
+        placeholder: 'Ex: Engenharia Ambiental, Biologia, Direito...',
+        fieldId: '754', // UTM Area de Formacao
+        condition: (data) => data['753'] === 'Sim',
+        delay: 500
+      },
+      {
+        id: 'q1',
+        botMessage: "Agora vamos entender sua experiência com tecnologia. Como você avalia o seu nível de conhecimento sobre IA?",
+        inputType: 'buttons',
+        options: [
+          "Nunca usei ferramentas de IA",
+          "Uso apenas algumas IAs generativas, mas não aplico no trabalho",
+          "Uso frequentemente ferramentas de IA para acelerar meus projetos",
+          "Já construí projetos complexos e avançados com novos modelos de IA"
+        ],
+        fieldId: '791',
+        delay: 500
+      },
+      {
+        id: 'q2',
+        botMessage: "Interessante! Descreva brevemente como você usa a IA no seu dia a dia (ou como gostaria de usar).",
+        inputType: 'textarea',
+        placeholder: 'Escreva sua resposta...',
+        fieldId: '792',
+        delay: 500
+      },
+      {
+        id: 'q3',
+        botMessage: "Qual é o seu principal objetivo profissional ao aplicar Inteligência Artificial? (Você pode selecionar mais de uma opção)",
+        inputType: 'checkboxes',
+        options: [
+          "Otimizar relatórios ambientais",
+          "Análise avançada de dados e mapas",
+          "Desenvolver softwares e aplicativos com IA",
+          "Criar minhas próprias automações do zero",
+          "Atualização de carreira"
+        ],
+        fieldId: '793',
+        delay: 500
+      },
+      {
+        id: 'q4',
+        botMessage: "Você lida frequentemente com grandes volumes de dados ou documentos complexos no seu trabalho (como PDFs longos, laudos, dados geoespaciais)?",
+        inputType: 'buttons',
+        options: [
+          "Sim, quase todos os dias",
+          "Ocasionalmente",
+          "Não, raramente"
+        ],
+        fieldId: '794',
+        delay: 500
+      },
+      {
+        id: 'q5',
+        botMessage: "Você já tentou automatizar alguma tarefa repetitiva no seu trabalho antes?",
+        inputType: 'buttons',
+        options: ["Sim", "Não"],
+        fieldId: '795',
+        delay: 500
+      },
+      {
+        id: 'q6',
+        botMessage: "Como você acha que uma pós em Inteligência Artificial aplicada ao meio ambiente pode te ajudar na sua vida profissional?",
+        inputType: 'textarea',
+        placeholder: 'Escreva sua resposta...',
+        fieldId: '796',
+        delay: 500
+      },
+      {
+        id: 'q7',
+        botMessage: "O que você considera como a sua maior dificuldade ou desafio para adotar IA no trabalho hoje?",
+        inputType: 'textarea',
+        placeholder: 'Escreva sua resposta...',
+        fieldId: '797',
+        delay: 500
+      },
+      {
+        id: 'q8',
+        botMessage: "Por fim, quantas horas semanais você tem disponíveis para se dedicar aos estudos e construção de projetos na Pós?",
+        inputType: 'buttons',
+        options: ["Até 2 horas", "De 2 a 4 horas", "Mais de 4 horas"],
+        fieldId: '798',
+        delay: 500
+      },
+      {
+        id: 'final',
+        botMessage: "Excelente, {name}! Já registramos o seu perfil. Nossa equipe pedagógica fará a análise e entraremos em contato via WhatsApp com os próximos passos. Você também será incluído(a) no nosso grupo VIP de WhatsApp para receber mais detalhes da Turma Fundadora.",
+        isFinal: true,
+        delay: 1000
       }
-    }
-  });
+    ];
 
-  // Detailed Phone validation function
-  const validatePhone = (value) => {
-    const cleanValue = value.replace(/\D/g, '');
-    
-    if (cleanValue.length === 0) {
-      return { isValid: true, message: '' }; // Required attribute handles empty field
-    }
-    
-    if (cleanValue.length !== 11) {
-      return { isValid: false, message: 'O WhatsApp deve ter exatamente 11 dígitos (DDD + 9 + número).' };
-    }
-    
-    const ddd = cleanValue.substring(0, 2);
-    const ninthDigit = cleanValue.charAt(2);
-    
-    // DDDs in Brazil are 11-99, second digit cannot be 0
-    const dddRegex = /^[1-9][1-9]$/;
-    if (!dddRegex.test(ddd)) {
-      return { isValid: false, message: 'O DDD informado é inválido.' };
-    }
-    
-    if (ninthDigit !== '9') {
-      return { isValid: false, message: 'O número de celular deve começar com o dígito 9 (Ex: DD9XXXXXXXX).' };
-    }
-    
-    return { isValid: true, message: '' };
-  };
+    this.initEvents();
+  }
 
-  // Strict Phone formatting and digits restriction (Exactly 11 digits)
-  phoneInput.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\D/g, ''); // Strip non-numeric
-    if (value.length > 11) {
-      value = value.slice(0, 11);
-    }
-    e.target.value = value;
-    // Clear validation error while typing to allow correction
-    phoneInput.setCustomValidity('');
-  });
+  initEvents() {
+    this.triggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openChatbot();
+      });
+    });
 
-  // Validate on blur (quietly, without reporting)
-  phoneInput.addEventListener('blur', () => {
-    const value = phoneInput.value;
-    const validation = validatePhone(value);
-    if (!validation.isValid) {
-      phoneInput.setCustomValidity(validation.message);
-    } else {
-      phoneInput.setCustomValidity('');
-    }
-  });
+    this.closeBtn.addEventListener('click', () => {
+      this.closeChatbot();
+    });
 
-  // Form Submission
-  form.addEventListener('submit', (e) => {
-    const validation = validatePhone(phoneInput.value);
-    if (!validation.isValid) {
-      e.preventDefault(); // Block submit
-      phoneInput.setCustomValidity(validation.message);
-      phoneInput.reportValidity(); // Show native bubble
-      return;
-    }
+    // Close on overlay click
+    this.modal.addEventListener('click', (e) => {
+      if (e.target === this.modal) {
+        this.closeChatbot();
+      }
+    });
+  }
 
-    e.preventDefault();
-
-    const submitBtn = document.getElementById('submit-btn');
-    if (!submitBtn) return;
-
-    // Loading State
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i data-lucide="loader" class="animate-spin"></i> Registrando sua vaga...';
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-
-    // Directly transition to the success card (simulated delay for premium feel)
+  openChatbot() {
+    this.modal.style.display = 'flex';
+    // Small delay to allow display: flex to apply before opacity transition
     setTimeout(() => {
-      const card = document.getElementById('inscricao');
-      if (card) {
-        card.innerHTML = `
-          <div class="card-glow-top"></div>
-          <div class="text-center" style="padding: 20px 0; display: flex; flex-direction: column; align-items: center;">
-            <div style="background-color: rgba(124, 191, 57, 0.1); border: 1px solid rgba(124, 191, 57, 0.2); color: var(--color-primary); width: 64px; height: 64px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; border-radius: 20px 0 20px 0;">
-              <i data-lucide="check" style="width: 32px; height: 32px;"></i>
-            </div>
-            <h3 class="card-title" style="color: var(--color-primary); margin-bottom: 12px;">Inscrição Realizada!</h3>
-            <p class="card-subtitle" style="font-size: 1rem; margin-bottom: 24px; color: var(--color-text-muted-light);">Sua vaga na Turma Fundadora foi pré-reservada com sucesso. Nossa equipe entrará em contato via WhatsApp.</p>
-            <a href="https://ambientalpro.com.br/" target="_blank" class="btn btn-primary btn-block">Acessar Site Principal</a>
-          </div>
-        `;
-        if (typeof lucide !== 'undefined') lucide.createIcons();
+      this.modal.style.opacity = '1';
+      this.modal.style.pointerEvents = 'auto';
+      this.modal.querySelector('.chatbot-container').style.transform = 'scale(1)';
+    }, 10);
+    
+    // Start flow if not started
+    if (this.currentStep === 0 && this.messagesContainer.children.length === 0) {
+      this.processNextStep();
+    }
+  }
+
+  closeChatbot() {
+    this.modal.style.opacity = '0';
+    this.modal.style.pointerEvents = 'none';
+    this.modal.querySelector('.chatbot-container').style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      this.modal.style.display = 'none';
+    }, 300);
+  }
+
+  getUTMs() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      '747': params.get('utm_campaign') || '',
+      '748': params.get('utm_source') || '',
+      '749': params.get('utm_medium') || '',
+      '750': params.get('utm_content') || '',
+      '751': params.get('utm_term') || '',
+      '789': new Date().toISOString()
+    };
+  }
+
+  async sendDataToActiveCampaign() {
+    try {
+      const utms = this.getUTMs();
+      const payload = {
+        email: this.userData.email,
+        firstName: this.userData.firstName,
+        phone: this.userData.phone,
+        fieldValues: []
+      };
+
+      // Merge user data and UTMs into fieldValues
+      const allFields = { ...this.userData, ...utms };
+      
+      // Remove standard fields from the fieldValues array processing
+      delete allFields.email;
+      delete allFields.firstName;
+      delete allFields.phone;
+
+      for (const [id, value] of Object.entries(allFields)) {
+        if (value) {
+          payload.fieldValues.push({ field: id, value: value });
+        }
       }
-    }, 1000);
-  });
+
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        console.error('Erro ao salvar os dados:', await response.text());
+      }
+    } catch (error) {
+      console.error('Erro na requisição para a API:', error);
+    }
+  }
+
+  scrollToBottom() {
+    const wrapper = document.querySelector('.chatbot-messages-wrapper');
+    wrapper.scrollTo({
+      top: wrapper.scrollHeight,
+      behavior: 'smooth'
+    });
+  }
+
+  showTyping() {
+    const id = 'typing-' + Date.now();
+    const html = `
+      <div class="chat-msg bot-msg" id="${id}">
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+    `;
+    this.messagesContainer.insertAdjacentHTML('beforeend', html);
+    this.scrollToBottom();
+    return id;
+  }
+
+  removeTyping(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  addBotMessage(text) {
+    // Replace placeholders
+    let parsedText = text;
+    if (this.userData.firstName) {
+      const shortName = this.userData.firstName.split(' ')[0];
+      parsedText = parsedText.replace('{name}', shortName);
+    }
+
+    const html = `
+      <div class="chat-msg bot-msg">
+        <div class="msg-bubble">${parsedText}</div>
+      </div>
+    `;
+    this.messagesContainer.insertAdjacentHTML('beforeend', html);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    this.scrollToBottom();
+  }
+
+  addUserMessage(text) {
+    const html = `
+      <div class="chat-msg user-msg">
+        <div class="msg-bubble">${text}</div>
+      </div>
+    `;
+    this.messagesContainer.insertAdjacentHTML('beforeend', html);
+    this.scrollToBottom();
+  }
+
+  renderInputArea(stepData) {
+    this.inputArea.innerHTML = '';
+    
+    if (stepData.inputType === 'text' || stepData.inputType === 'email' || stepData.inputType === 'tel' || stepData.inputType === 'textarea') {
+      const isTextarea = stepData.inputType === 'textarea';
+      const inputTag = isTextarea ? 
+        `<textarea class="chat-input" id="chat-input-field" placeholder="${stepData.placeholder}" rows="1"></textarea>` : 
+        `<input type="${stepData.inputType}" class="chat-input" id="chat-input-field" placeholder="${stepData.placeholder}">`;
+        
+      this.inputArea.innerHTML = `
+        <div class="chat-input-wrapper">
+          ${inputTag}
+          <button id="chat-send-btn" class="chat-send-btn" disabled>
+            <i data-lucide="arrow-up"></i>
+          </button>
+        </div>
+      `;
+      
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      const inputEl = document.getElementById('chat-input-field');
+      const sendBtn = document.getElementById('chat-send-btn');
+      
+      // Auto-resize textarea
+      if (isTextarea) {
+        inputEl.addEventListener('input', function() {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+        });
+      }
+
+      inputEl.addEventListener('input', () => {
+        sendBtn.disabled = inputEl.value.trim().length === 0;
+      });
+
+      const submitAction = () => {
+        const val = inputEl.value.trim();
+        if (val) {
+          this.userData[stepData.fieldId] = val;
+          this.addUserMessage(val);
+          this.inputArea.innerHTML = ''; // clear input
+          this.currentStep++;
+          this.processNextStep();
+        }
+      };
+
+      sendBtn.addEventListener('click', submitAction);
+      inputEl.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          submitAction();
+        }
+      });
+      
+      inputEl.focus();
+
+    } else if (stepData.inputType === 'buttons') {
+      const btnsHtml = stepData.options.map(opt => 
+        `<button class="chat-option-btn">${opt}</button>`
+      ).join('');
+      
+      this.inputArea.innerHTML = `
+        <div class="chat-options">
+          ${btnsHtml}
+        </div>
+      `;
+
+      const btns = this.inputArea.querySelectorAll('.chat-option-btn');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.textContent;
+          this.userData[stepData.fieldId] = val;
+          this.addUserMessage(val);
+          this.inputArea.innerHTML = '';
+          this.currentStep++;
+          this.processNextStep();
+        });
+      });
+
+    } else if (stepData.inputType === 'checkboxes') {
+      const checksHtml = stepData.options.map((opt, i) => `
+        <label class="chat-checkbox-label">
+          <input type="checkbox" class="chat-checkbox" value="${opt}" id="chk-${i}">
+          <span>${opt}</span>
+        </label>
+      `).join('');
+      
+      this.inputArea.innerHTML = `
+        <div class="chat-options">
+          ${checksHtml}
+          <button class="chat-action-btn" id="chat-confirm-btn">Confirmar Seleção</button>
+        </div>
+      `;
+
+      const confirmBtn = document.getElementById('chat-confirm-btn');
+      confirmBtn.addEventListener('click', () => {
+        const checked = Array.from(this.inputArea.querySelectorAll('.chat-checkbox:checked')).map(cb => cb.value);
+        if (checked.length > 0) {
+          const val = checked.join(' || '); // ActiveCampaign múltipla escolha format
+          this.userData[stepData.fieldId] = val;
+          this.addUserMessage(checked.join(', '));
+          this.inputArea.innerHTML = '';
+          this.currentStep++;
+          this.processNextStep();
+        } else {
+          alert('Selecione pelo menos uma opção.');
+        }
+      });
+    }
+  }
+
+  async processNextStep() {
+    if (this.currentStep >= this.flow.length) return;
+
+    let stepData = this.flow[this.currentStep];
+
+    // Check condition
+    if (stepData.condition && !stepData.condition(this.userData)) {
+      this.currentStep++;
+      return this.processNextStep();
+    }
+
+    // Is typing simulation
+    const typingId = this.showTyping();
+    
+    setTimeout(async () => {
+      this.removeTyping(typingId);
+      this.addBotMessage(stepData.botMessage);
+      
+      if (stepData.isFinal) {
+        this.inputArea.innerHTML = '';
+        await this.sendDataToActiveCampaign();
+      } else if (!stepData.inputType) {
+        // Just a bot message, go to next
+        this.currentStep++;
+        this.processNextStep();
+      } else {
+        // Need user input
+        this.renderInputArea(stepData);
+      }
+    }, stepData.delay || 800);
+  }
 }
+
 
 // Global Custom styling injector for spinning animations
 const inlineStyle = document.createElement('style');

@@ -113,7 +113,7 @@
         </ul>
       </nav>
       <div class="header-cta">
-        <a href="#inscricao" class="btn btn-secondary-outline btn-sm">Garantir Vaga</a>
+        <a href="#inscricao" class="btn btn-secondary-outline btn-sm chatbot-trigger">Faça a sua aplicação!</a>
       </div>
       <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Abrir Menu">
         <i data-lucide="menu"></i>
@@ -155,10 +155,10 @@
           </p>
 
           <div style="margin-top: 8px; margin-bottom: 48px;">
-            <a href="#" id="inscricao" class="btn btn-primary btn-lg btn-glow pulse-glow"
-              style="display: inline-flex; align-items: center; gap: 10px;">
-              Quero Garantir Minha Vaga de Pioneiro <i data-lucide="arrow-right"></i>
-            </a>
+            <button type="button" id="inscricao" class="btn btn-primary btn-lg btn-glow pulse-glow chatbot-trigger"
+              style="display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer; font-family: inherit;">
+              Faça a sua aplicação! <i data-lucide="arrow-right"></i>
+            </button>
           </div>
 
           <div class="hero-social-proof">
@@ -192,7 +192,7 @@
             <li><i data-lucide="check" style="color: var(--color-primary);"></i> Suporte prioritário da coordenação para
               tirar dúvidas de carreira e projetos.</li>
           </ul>
-          <a href="#hero" class="btn btn-primary btn-lg btn-glow">Aplicar para ser Aluno Fundador</a>
+          <a href="#inscricao" class="btn btn-primary btn-lg btn-glow chatbot-trigger">Faça a sua aplicação!</a>
         </div>
       </div>
     </section>
@@ -603,7 +603,7 @@
               style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
               <img src="/logo-ambientalpro.webp" alt="Logo Ambiental Pro" class="partnership-logos"
                 style="max-height: 80px; width: auto;">
-              <a href="#hero" class="btn btn-primary btn-lg btn-glow">Quero Aplicar para a Turma</a>
+              <a href="#inscricao" class="btn btn-primary btn-lg btn-glow chatbot-trigger">Faça a sua aplicação!</a>
             </div>
           </div>
         </div>
@@ -1015,7 +1015,7 @@
           <h2 style="font-size: 2.2rem; margin-bottom: 20px;" class="gradient-text">Seja um Pioneiro da Pós IA.MA</h2>
           <p style="margin-bottom: 30px; font-size: 1.1rem;">Garanta sua vaga de fundador com desconto exclusivo e
             lidere a revolução da Inteligência Artificial no meio ambiente.</p>
-          <a href="#hero" class="btn btn-primary btn-lg btn-glow">Garantir Minha Vaga de Pioneiro <i
+          <a href="#inscricao" class="btn btn-primary btn-lg btn-glow chatbot-trigger">Faça a sua aplicação! <i
               data-lucide="arrow-right"></i></a>
         </div>
       </div>
@@ -1029,6 +1029,37 @@
         Aplicada ao Meio Ambiente (Pós IA.MA). Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <!-- Floating CTA -->
+  <button id="floating-cta" class="btn btn-primary btn-glow pulse-glow chatbot-trigger" style="position: fixed; bottom: 20px; right: 20px; z-index: 99; display: flex; align-items: center; gap: 8px; border-radius: 50px; padding: 12px 24px; font-weight: 600; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(124, 191, 57, 0.4); font-family: inherit;">
+    Faça a sua aplicação! <i data-lucide="message-square"></i>
+  </button>
+
+  <!-- Chatbot Modal -->
+  <div id="chatbot-modal" class="chatbot-overlay" style="display: none; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;">
+    <div class="chatbot-container glassmorphism" style="transform: scale(0.95); transition: transform 0.3s ease;">
+      <button id="close-chatbot" class="chatbot-close-btn" aria-label="Fechar">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="chatbot-header">
+        <div class="chatbot-avatar" style="background-color: rgba(124, 191, 57, 0.15); color: var(--color-primary);">
+          <i data-lucide="bot"></i>
+        </div>
+        <div class="chatbot-title">
+          <h3>Agente Ambiental Pro</h3>
+          <span>Seleção Turma Fundadora</span>
+        </div>
+      </div>
+      <div class="chatbot-messages-wrapper">
+        <div class="chatbot-messages" id="chatbot-messages">
+          <!-- Messages will be injected here -->
+        </div>
+      </div>
+      <div class="chatbot-input-area" id="chatbot-input-area">
+        <!-- Input Box will be injected/controlled here -->
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/script.js"></script>
 </body>
