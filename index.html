@@ -18,7 +18,7 @@
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return; n = f.fbq = function () {
         n.callMethod ?
-        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
       };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
       n.queue = []; t = b.createElement(e); t.async = !0;
@@ -126,19 +126,6 @@
     <section id="hero" class="hero-section">
       <div class="container hero-container">
         <div class="hero-content reveal">
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span class="badge-text">Turma Fundadora • Inscrições Abertas</span>
-          </div>
-          <h1 class="hero-title">
-            Faça Parte da <span class="gradient-text">Turma Fundadora</span> da Pós-Graduação em IA Aplicada ao Meio
-            Ambiente
-          </h1>
-          <p class="hero-subtitle">
-            Seja um pioneiro no mercado. Aprenda a arquitetar sistemas de IA e criar soluções automatizadas no setor
-            ambiental, com condições históricas de lançamento e acompanhamento próximo dos coordenadores.
-          </p>
-
           <div class="hero-highlights">
             <div class="h-item">
               <i data-lucide="award" class="h-icon"></i>
@@ -154,57 +141,32 @@
             </div>
           </div>
 
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">Turma Fundadora • Inscrições Abertas</span>
+          </div>
+          <h1 class="hero-title">
+            Faça parte da <span class="gradient-text">Turma Fundadora</span> da Pós-Graduação em IA Aplicada ao Meio
+            Ambiente
+          </h1>
+          <p class="hero-subtitle">
+            Seja um pioneiro no mercado. Aprenda a arquitetar sistemas de IA e criar soluções automatizadas no setor
+            ambiental, com condições históricas de lançamento e acompanhamento próximo dos coordenadores.
+          </p>
+
+          <div style="margin-top: 8px; margin-bottom: 48px;">
+            <a href="#" id="inscricao" class="btn btn-primary btn-lg btn-glow pulse-glow"
+              style="display: inline-flex; align-items: center; gap: 10px;">
+              Quero Garantir Minha Vaga de Pioneiro <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+
           <div class="hero-social-proof">
             <div class="avatars-group">
               <span class="avatar-placeholder">80k+</span>
             </div>
             <p class="social-proof-text">Junte-se a mais de <strong>80.000 profissionais</strong> capacitados pela
               Ambiental Pro.</p>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal delay-1">
-          <div id="inscricao" class="registration-card glassmorphism">
-            <div class="card-glow-top"></div>
-            <div class="text-center" style="margin-bottom: 20px;">
-              <h3 class="card-title">Pré-Inscrição da Turma</h3>
-              <p class="card-subtitle">Garanta acesso prioritário, bônus de lançamento e a oferta exclusiva para alunos
-                fundadores.</p>
-            </div>
-
-            <form id="enrollment-form" class="registration-form">
-              <div class="form-group">
-                <input type="text" id="user-name" name="nome" placeholder="Seu nome" required>
-              </div>
-
-              <div class="form-group">
-                <input type="email" id="user-email" name="email" placeholder="Seu e-mail" required>
-              </div>
-
-              <div class="form-group">
-                <input type="tel" id="user-whatsapp" name="telefone" placeholder="Seu WhatsApp (com DDD)" required>
-              </div>
-
-              <div class="form-group">
-                <select id="user-graduation" name="graduacao" required>
-                  <option value="" disabled selected>Você possui graduação completa?</option>
-                  <option value="Sim">Sim</option>
-                  <option value="Não">Não</option>
-                </select>
-              </div>
-
-              <div class="form-group" id="education-area-group">
-                <input type="text" id="user-education-area" name="area_formacao"
-                  placeholder="Qual a sua área de formação?" required>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-block btn-lg btn-glow pulse-glow" id="submit-btn">
-                Quero Garantir Minha Vaga de Pioneiro <i data-lucide="arrow-right"></i>
-              </button>
-            </form>
-            <p class="security-text">
-              <i data-lucide="shield-alert"></i> Seus dados estão 100% seguros sob a LGPD.
-            </p>
           </div>
         </div>
       </div>
@@ -249,7 +211,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="award"></i></div>
+              <i data-lucide="award"></i>
+            </div>
             <h3>Desconto Histórico</h3>
             <p>O menor investimento possível para a Pós IA.MA, exclusivo e vitalício para a primeira turma de pioneiros.
             </p>
@@ -258,7 +221,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="users"></i></div>
+              <i data-lucide="users"></i>
+            </div>
             <h3>Acompanhamento Próximo</h3>
             <p>Mentorias ao vivo e canal direto para resolução de dúvidas.</p>
           </div>
@@ -266,7 +230,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="gem"></i></div>
+              <i data-lucide="gem"></i>
+            </div>
             <h3>Bônus de Pioneiro</h3>
             <p>Acesso exclusivo a masterclasses, ferramentas prontas e bônus adicionais que não estarão nas próximas
               turmas.</p>
@@ -275,7 +240,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="code"></i></div>
+              <i data-lucide="code"></i>
+            </div>
             <h3>Portfólio de Projetos</h3>
             <p>Substituição do TCC comum pelo desenvolvimento de sistemas de IA reais aplicados e colocados em produção.
             </p>
@@ -284,7 +250,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="clock"></i></div>
+              <i data-lucide="clock"></i>
+            </div>
             <h3>Formação 12 Meses (440h)</h3>
             <p>Grade completa abrangendo RAG, IoT, Visão Computacional e Agentes de IA do absoluto zero ao avançado.</p>
           </div>
@@ -292,7 +259,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="graduation-cap"></i></div>
+              <i data-lucide="graduation-cap"></i>
+            </div>
             <h3>Chancela Anhanguera & MEC</h3>
             <p>Diploma oficial de Especialista registrado formalmente no Ministério da Educação com reconhecimento
               nacional.</p>
@@ -590,7 +558,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="user-check"></i></div>
+              <i data-lucide="user-check"></i>
+            </div>
             <h3>1. Pré-Inscrição</h3>
             <p>Preencha seus dados de contato no formulário do topo desta página para iniciar seu processo de
               candidatura de forma simples e rápida.</p>
@@ -599,7 +568,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="clipboard-list"></i></div>
+              <i data-lucide="clipboard-list"></i>
+            </div>
             <h3>2. Questionário de Perfil</h3>
             <p>Responda a algumas perguntas breves sobre sua formação acadêmica, objetivos profissionais e interesse
               prático no uso da IA.</p>
@@ -608,7 +578,8 @@
           <div class="detail-card glassmorphism">
             <div class="detail-icon"
               style="background-color: rgba(124, 191, 57, 0.06); border: 1px solid rgba(124, 191, 57, 0.15); color: var(--color-primary);">
-              <i data-lucide="file-search"></i></div>
+              <i data-lucide="file-search"></i>
+            </div>
             <h3>3. Análise de Currículo</h3>
             <p>Nossa equipe pedagógica analisará seu currículo (CV) e respostas para confirmar se você atende aos
               pré-requisitos para receber bônus e mentorias exclusivas.</p>
@@ -623,8 +594,10 @@
                 <i data-lucide="help-circle" class="v-icon" style="color: var(--color-accent);"></i>
                 <h3>Por que fazemos seleção de alunos?</h3>
               </div>
-              <p>As vagas são estritamente limitadas para garantir acompanhamento próximo e mentorias diretas na construção do seu portfólio prático.</p>
-              <p style="margin-top: 10px;">Buscamos profissionais comprometidos a liderar o uso da IA no setor ambiental brasileiro.</p>
+              <p>As vagas são estritamente limitadas para garantir acompanhamento próximo e mentorias diretas na
+                construção do seu portfólio prático.</p>
+              <p style="margin-top: 10px;">Buscamos profissionais comprometidos a liderar o uso da IA no setor ambiental
+                brasileiro.</p>
             </div>
             <div class="crea-image-container"
               style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
@@ -655,8 +628,10 @@
                   <img src="/faculty/henrique.webp" alt="Henrique Gonzalez" class="mentor-photo">
                 </div>
                 <h3>Henrique Gonzalez</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO AMBIENTAL (UFRJ) E CO-FUNDADOR DA AMBIENTAL PRO</span>
-                <p>Atua com geotecnologias, inteligência artificial, análise espacial de dados ambientais e gestão de áreas contaminadas.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO AMBIENTAL (UFRJ) E CO-FUNDADOR
+                  DA AMBIENTAL PRO</span>
+                <p>Atua com geotecnologias, inteligência artificial, análise espacial de dados ambientais e gestão de
+                  áreas contaminadas.</p>
               </div>
             </div>
             <!-- Slide 2 -->
@@ -666,8 +641,10 @@
                   <img src="/faculty/hermann.webp" alt="Hermann Fernandes" class="mentor-photo">
                 </div>
                 <h3>Hermann Fernandes</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO AMBIENTAL (UFRJ) E ESPECIALISTA EM CIÊNCIA DE DADOS</span>
-                <p>Atua com gestão de casos ambientais complexos, análise de dados, geotecnologias e inovação aplicada à área ambiental.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO AMBIENTAL (UFRJ) E
+                  ESPECIALISTA EM CIÊNCIA DE DADOS</span>
+                <p>Atua com gestão de casos ambientais complexos, análise de dados, geotecnologias e inovação aplicada à
+                  área ambiental.</p>
               </div>
             </div>
             <!-- Slide 3 -->
@@ -677,8 +654,10 @@
                   <img src="/faculty/victor.webp" alt="Victor Silvestre" class="mentor-photo">
                 </div>
                 <h3>Victor V. Silvestre</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO SANITARISTA E AMBIENTAL, MESTRE E PESQUISADOR</span>
-                <p>Especialista em licenciamento ambiental e IA generativa aplicada ao setor ambiental. Fundador da VIVA Assessoria Ambiental e criador do Método Estudo Ambiental Eficiente com IA.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO SANITARISTA E AMBIENTAL,
+                  MESTRE E PESQUISADOR</span>
+                <p>Especialista em licenciamento ambiental e IA generativa aplicada ao setor ambiental. Fundador da VIVA
+                  Assessoria Ambiental e criador do Método Estudo Ambiental Eficiente com IA.</p>
               </div>
             </div>
             <!-- Slide 4 -->
@@ -688,8 +667,10 @@
                   <img src="/faculty/tatiana.webp" alt="Tatiana Pará" class="mentor-photo">
                 </div>
                 <h3>Tatiana Pará</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRA AGRÔNOMA, ESPECIALISTA EM GEOTECNOLOGIAS E MESTRE EM DESENVOLVIMENTO RURAL</span>
-                <p>Professora do IFPA, atua com geotecnologias, geoprocessamento com IA e projetos de inclusão digital e desenvolvimento sustentável na Amazônia.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRA AGRÔNOMA, ESPECIALISTA EM
+                  GEOTECNOLOGIAS E MESTRE EM DESENVOLVIMENTO RURAL</span>
+                <p>Professora do IFPA, atua com geotecnologias, geoprocessamento com IA e projetos de inclusão digital e
+                  desenvolvimento sustentável na Amazônia.</p>
               </div>
             </div>
             <!-- Slide 5 -->
@@ -699,8 +680,10 @@
                   <img src="/faculty/vinicius.webp" alt="Vinícius Ragghianti" class="mentor-photo">
                 </div>
                 <h3>Vinícius Ragghianti</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO AMBIENTAL E SANITARISTA, MBA EM GESTÃO DE PROJETOS</span>
-                <p>Especialista em saneamento, infraestrutura e IA generativa aplicada à engenharia. Co-fundador da ECHOA Engenharia e ex-presidente da ACESA.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO AMBIENTAL E SANITARISTA, MBA
+                  EM GESTÃO DE PROJETOS</span>
+                <p>Especialista em saneamento, infraestrutura e IA generativa aplicada à engenharia. Co-fundador da
+                  ECHOA Engenharia e ex-presidente da ACESA.</p>
               </div>
             </div>
             <!-- Slide 6 -->
@@ -710,8 +693,10 @@
                   <img src="/faculty/ariel.webp" alt="Ariel Dias" class="mentor-photo">
                 </div>
                 <h3>Ariel Dias</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">MESTRE EM CIÊNCIA DA COMPUTAÇÃO E AUTOR</span>
-                <p>Especialista em IA, Ciência de Dados e tecnologias educacionais, com atuação em instituições de ensino e projetos voltados à Indústria 4.0.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">MESTRE EM CIÊNCIA DA COMPUTAÇÃO E
+                  AUTOR</span>
+                <p>Especialista em IA, Ciência de Dados e tecnologias educacionais, com atuação em instituições de
+                  ensino e projetos voltados à Indústria 4.0.</p>
               </div>
             </div>
             <!-- Slide 7 -->
@@ -721,7 +706,8 @@
                   <img src="/faculty/luis.webp" alt="Luís Otávio Perin" class="mentor-photo">
                 </div>
                 <h3>Luís Otávio Perin</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ESPECIALISTA EM DESENVOLVIMENTO DE SOFTWARE E CIÊNCIAS CONTÁBEIS</span>
+                <span class="mentor-role" style="color: var(--color-primary);">ESPECIALISTA EM DESENVOLVIMENTO DE
+                  SOFTWARE E CIÊNCIAS CONTÁBEIS</span>
                 <p>Atua nas áreas de arquitetura de software, redes, computação distribuída e educação a distância.</p>
               </div>
             </div>
@@ -732,8 +718,10 @@
                   <img src="/faculty/danilo.webp" alt="Danilo M. Soares" class="mentor-photo">
                 </div>
                 <h3>Danilo M. Soares</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">COORDENADOR DE TI E MESTRE EM ADMINISTRAÇÃO</span>
-                <p>Especialista em ciência de dados, automação, IA generativa e gestão de processos, com experiência em tecnologia educacional.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">COORDENADOR DE TI E MESTRE EM
+                  ADMINISTRAÇÃO</span>
+                <p>Especialista em ciência de dados, automação, IA generativa e gestão de processos, com experiência em
+                  tecnologia educacional.</p>
               </div>
             </div>
             <!-- Slide 9 -->
@@ -743,8 +731,10 @@
                   <img src="/faculty/guilherme.webp" alt="Guilherme Modena" class="mentor-photo">
                 </div>
                 <h3>Guilherme Modena</h3>
-                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO ELETRICISTA E CEO DA CLIMAREAD</span>
-                <p>Especialista em monitoramento ambiental, automação, sistemas embarcados e soluções IoT, com ampla experiência no desenvolvimento de tecnologias para aquisição e análise de dados ambientais.</p>
+                <span class="mentor-role" style="color: var(--color-primary);">ENGENHEIRO ELETRICISTA E CEO DA
+                  CLIMAREAD</span>
+                <p>Especialista em monitoramento ambiental, automação, sistemas embarcados e soluções IoT, com ampla
+                  experiência no desenvolvimento de tecnologias para aquisição e análise de dados ambientais.</p>
               </div>
             </div>
           </div>

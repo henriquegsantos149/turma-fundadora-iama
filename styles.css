@@ -2,49 +2,60 @@
    DESIGN SYSTEM & CUSTOM VARIABLES
    ========================================== */
 :root {
-  --color-primary: #7cbf39; /* Verde folha (Acento principal) */
+  --color-primary: #7cbf39;
+  /* Verde folha (Acento principal) */
   --color-primary-rgb: 124, 191, 57;
-  --color-secondary: #168c40; /* Verde médio vibrante */
+  --color-secondary: #168c40;
+  /* Verde médio vibrante */
   --color-secondary-rgb: 22, 140, 64;
-  --color-dark-blue: #02734a; /* Verde floresta escuro da paleta */
+  --color-dark-blue: #02734a;
+  /* Verde floresta escuro da paleta */
   --color-dark-blue-rgb: 2, 115, 74;
-  --color-accent: #8cee2c; /* Verde neon */
+  --color-accent: #8cee2c;
+  /* Verde neon */
   --color-accent-rgb: 140, 238, 44;
-  
+
   /* Fundos & Superfícies */
-  --color-bg-deep: #000d14; /* Fundo escuro profundo (Pós IA.MA) */
-  --color-bg-dark: #00121c; /* Fundo escuro principal (Pós IA.MA) */
-  --color-bg-light: #F2F2F2; /* Fundo off-white da paleta */
-  --color-bg-card: rgba(0, 20, 30, 0.85); /* Cartões escuros translúcidos */
-  
+  --color-bg-deep: #000d14;
+  /* Fundo escuro profundo (Pós IA.MA) */
+  --color-bg-dark: #00121c;
+  /* Fundo escuro principal (Pós IA.MA) */
+  --color-bg-light: #F2F2F2;
+  /* Fundo off-white da paleta */
+  --color-bg-card: rgba(0, 20, 30, 0.85);
+  /* Cartões escuros translúcidos */
+
   /* Cores de Texto */
-  --color-text-light: #ffffff; /* Texto branco puro para alto contraste */
-  --color-text-muted: rgba(242, 242, 242, 0.7); /* Texto secundário claro */
-  --color-text-muted-light: rgba(242, 242, 242, 0.85); /* Texto claro de alta legibilidade */
-  
+  --color-text-light: #ffffff;
+  /* Texto branco puro para alto contraste */
+  --color-text-muted: rgba(242, 242, 242, 0.7);
+  /* Texto secundário claro */
+  --color-text-muted-light: rgba(242, 242, 242, 0.85);
+  /* Texto claro de alta legibilidade */
+
   /* Bordas */
   --color-border: rgba(124, 191, 57, 0.15);
   --color-border-hover: rgba(140, 238, 44, 0.4);
   --color-border-glow: rgba(140, 238, 44, 0.7);
-  
+
   /* Tipografia */
   --font-title: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-impact: 'Bebas Neue', sans-serif;
-  
+
   /* Sombras & Efeitos */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 20px 50px -10px rgba(0, 0, 0, 0.6);
   --shadow-glow-cyan: 0 0 25px rgba(124, 191, 57, 0.4);
   --shadow-glow-emerald: 0 0 25px rgba(140, 238, 44, 0.35);
-  
+
   /* Bordas arredondadas (Assinatura Ambiental Pro: Cantos opostos arredondados) */
   --radius-sm: 12px 0 12px 0;
   --radius-md: 24px 0 24px 0;
   --radius-lg: 28px 0 28px 0;
   --radius-full: 9999px;
-  
+
   /* Transições */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -54,7 +65,9 @@
 /* ==========================================
    CSS RESET & CONFIGURAÇÕES GERAIS
    ========================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -77,7 +90,12 @@ body {
 }
 
 /* Tipografia */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-title);
   font-weight: 700;
   line-height: 1.2;
@@ -116,7 +134,8 @@ a {
   height: 700px;
   border-radius: 50%;
   filter: blur(150px);
-  opacity: 0.18; /* Aumentado de 0.12 para brilho mais vívido */
+  opacity: 0.18;
+  /* Aumentado de 0.12 para brilho mais vívido */
   pointer-events: none;
   z-index: -1;
   transition: all var(--transition-slow);
@@ -171,7 +190,7 @@ a {
 .bg-dark-layer {
   background-color: var(--color-bg-dark);
   /* Padrão de Grade Cartográfica para representação de SIG */
-  background-image: 
+  background-image:
     linear-gradient(rgba(var(--color-primary-rgb), 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(var(--color-primary-rgb), 0.02) 1px, transparent 1px);
   background-size: 45px 45px;
@@ -245,9 +264,10 @@ a {
 
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 20%, var(--color-accent) 65%, var(--color-secondary) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Badges (Destaque em formato de caixa gradiente sólida com cantos de assinatura) */
@@ -310,7 +330,8 @@ a {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: #ffffff;
   border: none;
-  box-shadow: 0 4px 18px rgba(41, 167, 217, 0.35); /* Sombra em ciano vibrante */
+  box-shadow: 0 4px 18px rgba(41, 167, 217, 0.35);
+  /* Sombra em ciano vibrante */
 }
 
 .btn-primary:hover {
@@ -490,22 +511,22 @@ a {
     z-index: 999;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
   }
-  
+
   .nav-menu.open {
     right: 0;
   }
-  
+
   .nav-menu ul {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .mobile-menu-toggle {
     display: block;
     position: relative;
     z-index: 1001;
   }
-  
+
   .header-cta {
     display: none;
   }
@@ -523,8 +544,8 @@ a {
   padding-bottom: 60px;
   position: relative;
   /* Grade cartográfica integrada com a imagem de satélite do fundo do hero */
-  background-image: 
-    linear-gradient(180deg, rgba(0, 13, 20, 0.91) 0%, rgba(0, 13, 20, 0.97) 100%), 
+  background-image:
+    linear-gradient(180deg, rgba(0, 13, 20, 0.91) 0%, rgba(0, 13, 20, 0.97) 100%),
     linear-gradient(rgba(var(--color-primary-rgb), 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(var(--color-primary-rgb), 0.03) 1px, transparent 1px),
     url('./hero_background.webp');
@@ -534,45 +555,59 @@ a {
 }
 
 .hero-container {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+.hero-content {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 @media (max-width: 991px) {
   .hero-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
     text-align: center;
-  }
-  .hero-highlights {
-    justify-content: center;
-  }
-  .hero-social-proof {
-    justify-content: center;
   }
 }
 
+.hero-highlights {
+  justify-content: center;
+}
+
+.hero-social-proof {
+  justify-content: center;
+}
+
 .hero-title {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
 }
 
 @media (min-width: 768px) {
   .hero-title {
-    font-size: 3rem;
+    font-size: 3.6rem;
+    line-height: 1.25;
   }
 }
 
+
+
 .hero-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-bottom: 36px;
   line-height: 1.6;
   color: var(--color-text-muted-light);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-highlights {
@@ -619,7 +654,8 @@ a {
 .avatar-placeholder {
   width: 46px;
   height: 46px;
-  border-radius: 12px 0 12px 0; /* Cantos de assinatura em vez de círculo */
+  border-radius: 12px 0 12px 0;
+  /* Cantos de assinatura em vez de círculo */
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   border: 2px solid var(--color-bg-deep);
   display: flex;
@@ -841,18 +877,25 @@ a {
 }
 
 @keyframes scrollNexos {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 768px) {
   .nexos-carousel-container {
     padding: 12px 0;
   }
+
   .nexos-carousel-track span {
     font-size: 1.2rem;
     margin: 0 20px;
   }
+
   .nexos-carousel-track span::after {
     margin-left: 40px;
   }
@@ -935,7 +978,8 @@ a {
 
 .accordion-item.active {
   border-color: var(--color-border-glow);
-  background-color: rgba(41, 167, 217, 0.08); /* Fundo ciano translúcido */
+  background-color: rgba(41, 167, 217, 0.08);
+  /* Fundo ciano translúcido */
 }
 
 .accordion-item.active .accordion-icon {
@@ -964,9 +1008,11 @@ a {
   .accordion-toggle {
     padding: 16px 20px;
   }
+
   .module-number {
     margin-right: 12px;
   }
+
   .accordion-body {
     padding: 0 20px 20px 20px;
   }
@@ -1036,7 +1082,8 @@ a {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-primary);
-  background-color: rgba(41, 167, 217, 0.08); /* Fundo ciano translúcido */
+  background-color: rgba(41, 167, 217, 0.08);
+  /* Fundo ciano translúcido */
   padding: 4px 8px;
   border-radius: 4px;
   margin-bottom: 8px;
@@ -1166,6 +1213,7 @@ a {
 }
 
 @media (min-width: 576px) {
+
   .mentor-slide,
   .testimonial-slide {
     flex: 0 0 calc(50% - 12px);
@@ -1176,6 +1224,7 @@ a {
   .mentor-slide {
     flex: 0 0 calc(33.333% - 16px);
   }
+
   .testimonial-slide {
     flex: 0 0 calc(50% - 12px);
   }
@@ -1274,7 +1323,8 @@ a {
 .t-photo {
   width: 52px;
   height: 52px;
-  border-radius: 14px 0 14px 0; /* Cantos de assinatura em vez de círculo */
+  border-radius: 14px 0 14px 0;
+  /* Cantos de assinatura em vez de círculo */
   object-fit: cover;
   border: 2px solid var(--color-accent);
 }
@@ -1324,12 +1374,12 @@ a {
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: 0 4px 15px rgba(124,191,57, 0.3);
+  box-shadow: 0 4px 15px rgba(124, 191, 57, 0.3);
 }
 
 .carousel-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(124,191,57, 0.5);
+  box-shadow: 0 0 20px rgba(124, 191, 57, 0.5);
 }
 
 @media (min-width: 768px) {
@@ -1340,20 +1390,20 @@ a {
     z-index: 20;
     opacity: 0;
   }
-  
+
   .mentors-carousel-wrapper:hover .carousel-btn,
   .testimonials-carousel-wrapper:hover .carousel-btn {
     opacity: 1;
   }
-  
+
   .carousel-btn:hover {
     transform: translateY(-50%) scale(1.1);
   }
-  
+
   .prev-btn {
     left: 16px;
   }
-  
+
   .next-btn {
     right: 16px;
   }
@@ -1401,7 +1451,8 @@ a {
 .vip-icon-wrapper {
   width: 68px;
   height: 68px;
-  border-radius: 18px 0 18px 0; /* Cantos de assinatura em vez de círculo */
+  border-radius: 18px 0 18px 0;
+  /* Cantos de assinatura em vez de círculo */
   background-color: rgba(41, 167, 217, 0.08);
   border: 1px solid rgba(41, 167, 217, 0.25);
   color: var(--color-accent);
@@ -1506,7 +1557,8 @@ a {
 
 .faq-item.active {
   border-color: var(--color-border-glow);
-  background-color: rgba(41, 167, 217, 0.06); /* Fundo ciano translúcido */
+  background-color: rgba(41, 167, 217, 0.06);
+  /* Fundo ciano translúcido */
 }
 
 .faq-item.active .faq-icon {
@@ -1643,19 +1695,37 @@ a {
    ANIMAÇÕES E EFEITOS
    ========================================== */
 @keyframes pulse-dot {
-  0% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(0, 245, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 245, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 245, 255, 0);
+  }
 }
 
 @keyframes shine {
-  0% { left: -50%; }
-  10% { left: 125%; }
-  100% { left: 125%; }
+  0% {
+    left: -50%;
+  }
+
+  10% {
+    left: 125%;
+  }
+
+  100% {
+    left: 125%;
+  }
 }
 
 @keyframes zoom-in-lightbox {
-  to { transform: scale(1); }
+  to {
+    transform: scale(1);
+  }
 }
 
 /* Transição de revelação no scroll */
@@ -1670,16 +1740,26 @@ a {
   transform: translateY(0);
 }
 
-.delay-1 { transition-delay: 0.15s; }
-.delay-2 { transition-delay: 0.3s; }
-.delay-3 { transition-delay: 0.45s; }
+.delay-1 {
+  transition-delay: 0.15s;
+}
+
+.delay-2 {
+  transition-delay: 0.3s;
+}
+
+.delay-3 {
+  transition-delay: 0.45s;
+}
 
 /* ==========================================
    SOBREPOSIÇÕES PARA DOBRAS CLARAS (HIGH-CONTRAST LIGHT SECTIONS)
    ========================================== */
 .bg-light-layer {
-  background-color: #F2F2F2; /* Off-white com tom de cinza claro da paleta */
-  color: #1e293b; /* Texto escuro slate */
+  background-color: #F2F2F2;
+  /* Off-white com tom de cinza claro da paleta */
+  color: #1e293b;
+  /* Texto escuro slate */
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
   position: relative;
@@ -1687,20 +1767,22 @@ a {
 }
 
 /* Títulos, textos e links dentro da dobra clara */
-.bg-light-layer h1, 
-.bg-light-layer h2, 
-.bg-light-layer h3, 
+.bg-light-layer h1,
+.bg-light-layer h2,
+.bg-light-layer h3,
 .bg-light-layer h4,
 .bg-light-layer h5 {
-  color: #0f172a; /* Títulos em cor escura profunda */
+  color: #0f172a;
+  /* Títulos em cor escura profunda */
 }
 
-.bg-light-layer p, 
+.bg-light-layer p,
 .bg-light-layer .section-desc,
 .bg-light-layer .t-quote,
 .bg-light-layer .accordion-body p,
 .bg-light-layer .faq-body p {
-  color: #475569; /* Parágrafos e descrições em tom de cinza escuro */
+  color: #475569;
+  /* Parágrafos e descrições em tom de cinza escuro */
 }
 
 .bg-light-layer strong {
@@ -1708,7 +1790,7 @@ a {
 }
 
 /* Oculta ou diminui brilhos neon de fundo na dobra clara para manter legibilidade */
-.bg-light-layer ~ .glow-bg-radial {
+.bg-light-layer~.glow-bg-radial {
   opacity: 0.01;
 }
 
@@ -1869,16 +1951,19 @@ a {
 
 /* Correções de contraste para textos e ícones claros em dobras claras */
 .bg-light-layer .t-title {
-  color: #64748b; /* Slate-500 para boa leitura no fundo branco do card */
+  color: #64748b;
+  /* Slate-500 para boa leitura no fundo branco do card */
 }
 
 .bg-light-layer .faq-icon,
 .bg-light-layer .accordion-icon {
-  color: #64748b; /* Slate-500 em vez de ciano claro para contraste nos acordeões */
+  color: #64748b;
+  /* Slate-500 em vez de ciano claro para contraste nos acordeões */
 }
 
 .bg-light-layer .mentor-role {
-  color: var(--color-secondary); /* Azul intermediário mais escuro para melhor legibilidade no card branco */
+  color: var(--color-secondary);
+  /* Azul intermediário mais escuro para melhor legibilidade no card branco */
 }
 
 .bg-light-layer .e-mec-tag {
@@ -1901,7 +1986,8 @@ a {
 /* Estilos específicos para o card do CREA e Admissão (Escuro no fundo claro) */
 .bg-light-layer .bg-crea-dark,
 .bg-light-layer .bg-admission-dark {
-  background: var(--color-bg-dark) !important; /* Fundo escuro principal #111422 */
+  background: var(--color-bg-dark) !important;
+  /* Fundo escuro principal #111422 */
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   color: var(--color-text-muted-light) !important;
   box-shadow: var(--shadow-md) !important;
@@ -1933,14 +2019,15 @@ a {
 
 .bg-light-layer .bg-crea-dark strong,
 .bg-light-layer .bg-admission-dark strong {
-  color: var(--color-primary) !important; /* Destaque em ciano vibrante para leitura no fundo escuro */
+  color: var(--color-primary) !important;
+  /* Destaque em ciano vibrante para leitura no fundo escuro */
 }
 
 /* Correção de legibilidade para o Grupo VIP em dobras claras */
 .bg-light-layer .vip-benefits-list li {
   color: #475569;
 }
+
 .bg-light-layer .vip-benefits-list li i {
   color: var(--color-secondary);
 }
-
