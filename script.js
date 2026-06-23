@@ -709,6 +709,11 @@ class ChatbotApplication {
     const id = 'typing-' + Date.now();
     const html = `
       <div class="chat-msg bot-msg" id="${id}">
+        <div class="bot-avatar-container">
+          <div class="chatbot-avatar msg-avatar">
+            <img src="/robot-avatar.webp" alt="IA Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+          </div>
+        </div>
         <div class="typing-indicator">
           <div class="typing-dot"></div>
           <div class="typing-dot"></div>
@@ -726,6 +731,11 @@ class ChatbotApplication {
     if (el) el.remove();
   }
 
+  getCurrentTime() {
+    const now = new Date();
+    return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+  }
+
   addBotMessage(text) {
     // Replace placeholders
     let parsedText = text;
@@ -733,10 +743,19 @@ class ChatbotApplication {
       const shortName = this.userData.firstName.split(' ')[0];
       parsedText = parsedText.replace('{name}', shortName);
     }
+    const time = this.getCurrentTime();
 
     const html = `
       <div class="chat-msg bot-msg">
-        <div class="msg-bubble">${parsedText}</div>
+        <div class="bot-avatar-container">
+          <div class="chatbot-avatar msg-avatar">
+            <img src="/robot-avatar.webp" alt="IA Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+          </div>
+        </div>
+        <div class="msg-bubble">
+          ${parsedText}
+          <div class="msg-meta"><span class="msg-time">${time}</span></div>
+        </div>
       </div>
     `;
     this.messagesContainer.insertAdjacentHTML('beforeend', html);
@@ -745,12 +764,20 @@ class ChatbotApplication {
   }
 
   addUserMessage(text) {
+    const time = this.getCurrentTime();
     const html = `
       <div class="chat-msg user-msg">
-        <div class="msg-bubble">${text}</div>
+        <div class="msg-bubble">
+          ${text}
+          <div class="msg-meta">
+            <span class="msg-time">${time}</span>
+            <i data-lucide="check-check" class="msg-status"></i>
+          </div>
+        </div>
       </div>
     `;
     this.messagesContainer.insertAdjacentHTML('beforeend', html);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
     this.scrollToBottom();
   }
 
@@ -767,7 +794,7 @@ class ChatbotApplication {
         <div class="chat-input-wrapper">
           ${inputTag}
           <button id="chat-send-btn" class="chat-send-btn" disabled>
-            <i data-lucide="arrow-up"></i>
+            <i data-lucide="send"></i>
           </button>
         </div>
       `;

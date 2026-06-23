@@ -1963,6 +1963,7 @@ a {
 .bg-light-layer .gradient-text {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -4362,6 +4363,7 @@ a {
 .bg-light-layer .gradient-text {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -4481,7 +4483,9 @@ a {
   max-width: 600px;
   height: 85vh;
   max-height: 800px;
-  background: #111422; /* Fundo escuro adaptado */
+  background: rgba(0, 13, 20, 0.85); /* Fundo vidro escuro */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(124, 191, 57, 0.2);
   border-radius: 24px;
   display: flex;
@@ -4495,17 +4499,29 @@ a {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
   color: var(--color-text-muted);
   cursor: pointer;
   z-index: 10;
-  transition: color var(--transition-fast);
-  padding: 4px;
+  transition: all var(--transition-fast);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .chatbot-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
   color: #fff;
+  transform: scale(1.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .chatbot-header {
@@ -4514,7 +4530,7 @@ a {
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(6, 10, 19, 0.5);
+  background: rgba(6, 10, 19, 0.4);
 }
 
 .chatbot-avatar {
@@ -4562,20 +4578,56 @@ a {
   display: flex;
   flex-direction: column;
   max-width: 85%;
-  animation: fadeInMsg 0.4s ease forwards;
+  animation: bounceInMsg 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(20px) scale(0.95);
 }
 
-@keyframes fadeInMsg {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes bounceInMsg {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  60% { opacity: 1; transform: translateY(-2px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .bot-msg {
   align-self: flex-start;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.bot-avatar-container {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg-avatar {
+  width: 28px;
+  height: 28px;
+  background-color: rgba(124, 191, 57, 0.15);
+  color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity var(--transition-fast);
+}
+
+.msg-avatar i {
+  width: 16px;
+  height: 16px;
+}
+
+/* WhatsApp style: Hide avatar if the NEXT message is also a bot message. */
+.bot-msg:has(+ .bot-msg) .msg-avatar {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .bot-msg .msg-bubble {
@@ -4586,11 +4638,13 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 1rem;
   line-height: 1.5;
+  width: fit-content;
 }
 
 .user-msg {
   margin-top: 10px;
   align-self: flex-end;
+  align-items: flex-end;
 }
 
 .user-msg .msg-bubble {
@@ -4600,6 +4654,30 @@ a {
   padding: 14px 18px;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.msg-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.bot-msg .msg-meta {
+  color: #a0aec0;
+}
+
+.user-msg .msg-meta {
+  color: rgba(17, 17, 17, 0.75);
+}
+
+.msg-status {
+  width: 14px;
+  height: 14px;
+  color: #0d4b96; /* Blue ticks */
 }
 
 .chat-options {
@@ -4669,24 +4747,28 @@ a {
 /* AI Prompt Box styling for input area */
 .chatbot-input-area {
   padding: 20px 24px;
-  background: rgba(6, 10, 19, 0.8);
+  background: rgba(6, 10, 19, 0.4);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .chat-input-wrapper {
-  background: #1F2023;
-  border: 1px solid #444444;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 24px;
   padding: 8px 8px 8px 20px;
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: border-color var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  transition: all var(--transition-fast);
 }
 
 .chat-input-wrapper:focus-within {
+  background: rgba(255, 255, 255, 0.05);
   border-color: var(--color-primary);
+  box-shadow: 0 0 15px rgba(124, 191, 57, 0.25);
 }
 
 .chat-input {
@@ -4709,9 +4791,11 @@ a {
 }
 
 .chat-send-btn {
-  background: var(--color-primary);
-  color: #111;
-  border: none;
+  background: rgba(124, 191, 57, 0.15);
+  border: 1px solid rgba(124, 191, 57, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--color-primary);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -4725,13 +4809,16 @@ a {
 }
 
 .chat-send-btn:hover:not(:disabled) {
-  background: var(--color-secondary);
+  background: rgba(124, 191, 57, 0.25);
+  border-color: rgba(124, 191, 57, 0.5);
+  color: #fff;
   transform: translateY(-2px);
 }
 
 .chat-send-btn:disabled {
-  background: #444444;
-  color: #888888;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.2);
   cursor: not-allowed;
 }
 
@@ -4751,15 +4838,15 @@ a {
   height: 6px;
   background: var(--color-primary);
   border-radius: 50%;
-  animation: typingBounce 1.4s infinite ease-in-out both;
+  animation: typingWave 1.2s infinite ease-in-out;
 }
 
 .typing-dot:nth-child(1) { animation-delay: -0.32s; }
 .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
-@keyframes typingBounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+@keyframes typingWave {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
 }
 .live-horizontal-banner {
   background: linear-gradient(135deg, rgba(10, 18, 25, 0.95) 0%, rgba(20, 35, 50, 0.98) 100%);
