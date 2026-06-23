@@ -559,6 +559,8 @@ class ChatbotApplication {
   async sendDataToActiveCampaign() {
     try {
       const utms = this.getUTMs();
+
+      // Standard AC fields
       const payload = {
         email: this.userData.email,
         firstName: this.userData.firstName,
@@ -566,19 +568,25 @@ class ChatbotApplication {
         fieldValues: []
       };
 
-      // Merge user data and UTMs into fieldValues
-      const allFields = { ...this.userData, ...utms };
-      
-      // Remove standard fields from the fieldValues array processing
-      delete allFields.email;
-      delete allFields.firstName;
-      delete allFields.phone;
+      // Keys that are standard AC contact fields (not custom field IDs)
+      const standardKeys = new Set(['email', 'firstName', 'phone']);
 
-      for (const [id, value] of Object.entries(allFields)) {
-        if (value) {
-          payload.fieldValues.push({ field: id, value: value });
+      // Build fieldValues from userData (respostas do chatbot) + UTMs
+      // userData keys que são IDs de campos (números como string: '753', '791', etc.)
+      for (const [id, value] of Object.entries(this.userData)) {
+        if (!standardKeys.has(id) && value !== undefined && value !== null && String(value).trim() !== '') {
+          payload.fieldValues.push({ field: String(id), value: String(value) });
         }
       }
+
+      // Add UTM fields
+      for (const [id, value] of Object.entries(utms)) {
+        if (value !== undefined && value !== null && String(value).trim() !== '') {
+          payload.fieldValues.push({ field: String(id), value: String(value) });
+        }
+      }
+
+      console.log('[Chatbot] Payload enviado para /api/subscribe:', JSON.stringify(payload, null, 2));
 
       const response = await fetch('/api/subscribe', {
         method: 'POST',
@@ -586,11 +594,14 @@ class ChatbotApplication {
         body: JSON.stringify(payload)
       });
 
+      const responseData = await response.json().catch(() => ({}));
       if (!response.ok) {
-        console.error('Erro ao salvar os dados:', await response.text());
+        console.error('[Chatbot] Erro ao salvar os dados:', responseData);
+      } else {
+        console.log('[Chatbot] Dados enviados com sucesso:', responseData);
       }
     } catch (error) {
-      console.error('Erro na requisição para a API:', error);
+      console.error('[Chatbot] Erro na requisição para a API:', error);
     }
   }
 
