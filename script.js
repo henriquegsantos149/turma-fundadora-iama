@@ -537,8 +537,89 @@ class ChatbotApplication {
     
     // Start flow if not started
     if (this.currentStep === 0 && this.messagesContainer.children.length === 0) {
-      this.processNextStep();
+      const savedState = this.restoreStateFromLocalStorage();
+      if (savedState) {
+        this.userData = savedState.userData;
+        this.currentStep = savedState.currentStep;
+        this.replayHistory();
+      } else {
+        this.processNextStep();
+      }
     }
+  }
+
+  saveStateToLocalStorage() {
+    try {
+      const state = {
+        userData: this.userData,
+        currentStep: this.currentStep
+      };
+      localStorage.setItem('iama_chatbot_state', JSON.stringify(state));
+    } catch (e) {
+      console.error('[Chatbot] Falha ao salvar estado no localStorage:', e);
+    }
+  }
+
+  clearLocalStorageState() {
+    try {
+      localStorage.removeItem('iama_chatbot_state');
+    } catch (e) {
+      console.error('[Chatbot] Falha ao limpar estado no localStorage:', e);
+    }
+  }
+
+  restoreStateFromLocalStorage() {
+    try {
+      const saved = localStorage.getItem('iama_chatbot_state');
+      if (saved) {
+        const state = JSON.parse(saved);
+        if (state && state.userData && typeof state.currentStep === 'number') {
+          return state;
+        }
+      }
+    } catch (e) {
+      console.error('[Chatbot] Falha ao ler estado do localStorage:', e);
+    }
+    return null;
+  }
+
+  replayHistory() {
+    this.messagesContainer.innerHTML = '';
+    
+    // Loop through steps up to currentStep
+    for (let i = 0; i < this.currentStep; i++) {
+      const step = this.flow[i];
+      if (!step) continue;
+      
+      // Check condition (if it wasn't met, it was skipped, so we skip it in history too)
+      if (step.condition && !step.condition(this.userData)) {
+        continue;
+      }
+      
+      // Add bot message
+      this.addBotMessage(step.botMessage);
+      
+      // Add user message if inputType was present and answer exists
+      if (step.inputType && step.fieldId) {
+        const answer = this.userData[step.fieldId];
+        if (answer !== undefined && answer !== null) {
+          let displayVal = answer;
+          if (step.inputType === 'tel') {
+            if (answer.length === 11) {
+              displayVal = `(${answer.substring(0,2)}) ${answer.substring(2,3)} ${answer.substring(3,7)}-${answer.substring(7)}`;
+            } else if (answer.length === 10) {
+              displayVal = `(${answer.substring(0,2)}) ${answer.substring(2,6)}-${answer.substring(6)}`;
+            }
+          } else if (step.inputType === 'checkboxes') {
+            displayVal = answer.split(' || ').map(item => item.startsWith('Outro: ') ? item.substring(7) : item).join(', ');
+          }
+          this.addUserMessage(displayVal);
+        }
+      }
+    }
+    
+    // Resume flow
+    this.processNextStep();
   }
 
   closeChatbot() {
@@ -603,11 +684,14 @@ class ChatbotApplication {
       const responseData = await response.json().catch(() => ({}));
       if (!response.ok) {
         console.error('[Chatbot] Erro ao salvar os dados:', responseData);
+        return false;
       } else {
         console.log('[Chatbot] Dados enviados com sucesso:', responseData);
+        return true;
       }
     } catch (error) {
       console.error('[Chatbot] Erro na requisição para a API:', error);
+      return false;
     }
   }
 
@@ -715,6 +799,13 @@ class ChatbotApplication {
 
       const submitAction = () => {
         let val = inputEl.value.trim();
+        if (stepData.inputType === 'email') {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(val)) {
+            alert('Por favor, insira um e-mail válido (ex: nome@dominio.com).');
+            return;
+          }
+        }
         if (stepData.inputType === 'tel') {
           val = val.replace(/\D/g, '');
           if (val.length < 10) {
@@ -737,6 +828,12 @@ class ChatbotApplication {
           this.addUserMessage(displayVal);
           this.inputArea.innerHTML = ''; // clear input
           this.currentStep++;
+          this.saveStateToLocalStorage();
+          
+          if (stepData.fieldId === 'phone') {
+            this.sendDataToActiveCampaign(); // background sync
+          }
+          
           this.processNextStep();
         }
       };
@@ -770,6 +867,7 @@ class ChatbotApplication {
           this.addUserMessage(val);
           this.inputArea.innerHTML = '';
           this.currentStep++;
+          this.saveStateToLocalStorage();
           this.processNextStep();
         });
       });
@@ -846,6 +944,7 @@ class ChatbotApplication {
           this.addUserMessage(userMsgText);
           this.inputArea.innerHTML = '';
           this.currentStep++;
+          this.saveStateToLocalStorage();
           this.processNextStep();
         } else {
           alert('Selecione pelo menos uma opção.');
@@ -870,28 +969,54 @@ class ChatbotApplication {
     
     setTimeout(async () => {
       this.removeTyping(typingId);
-      this.addBotMessage(stepData.botMessage);
       
       if (stepData.isFinal) {
-        this.inputArea.innerHTML = `
-          <div class="chat-options">
-            <button class="chat-action-btn" id="chat-entendido-btn" style="width: 100%;">Entendido</button>
-          </div>
-        `;
-        const entendidoBtn = document.getElementById('chat-entendido-btn');
-        if (entendidoBtn) {
-          entendidoBtn.addEventListener('click', () => {
-            this.closeChatbot();
-          });
+        const syncTypingId = this.showTyping();
+        const success = await this.sendDataToActiveCampaign();
+        this.removeTyping(syncTypingId);
+        
+        if (success) {
+          this.addBotMessage(stepData.botMessage);
+          this.clearLocalStorageState();
+          
+          this.inputArea.innerHTML = `
+            <div class="chat-options">
+              <button class="chat-action-btn" id="chat-entendido-btn" style="width: 100%;">Entendido</button>
+            </div>
+          `;
+          const entendidoBtn = document.getElementById('chat-entendido-btn');
+          if (entendidoBtn) {
+            entendidoBtn.addEventListener('click', () => {
+              this.closeChatbot();
+            });
+          }
+        } else {
+          this.addBotMessage("Desculpe, ocorreu uma falha de conexão e não conseguimos salvar as suas respostas. Por favor, verifique sua internet e tente enviar novamente.");
+          
+          this.inputArea.innerHTML = `
+            <div class="chat-options">
+              <button class="chat-action-btn" id="chat-retry-btn" style="width: 100%;">Tentar Novamente</button>
+            </div>
+          `;
+          const retryBtn = document.getElementById('chat-retry-btn');
+          if (retryBtn) {
+            retryBtn.addEventListener('click', () => {
+              this.inputArea.innerHTML = '';
+              this.processNextStep();
+            });
+          }
         }
-        await this.sendDataToActiveCampaign();
-      } else if (!stepData.inputType) {
-        // Just a bot message, go to next
-        this.currentStep++;
-        this.processNextStep();
       } else {
-        // Need user input
-        this.renderInputArea(stepData);
+        this.addBotMessage(stepData.botMessage);
+        
+        if (!stepData.inputType) {
+          // Just a bot message, go to next
+          this.currentStep++;
+          this.processNextStep();
+        } else {
+          // Need user input
+          this.renderInputArea(stepData);
+        }
       }
     }, stepData.delay || 800);
   }
