@@ -830,10 +830,6 @@ class ChatbotApplication {
           this.currentStep++;
           this.saveStateToLocalStorage();
           
-          if (stepData.fieldId === 'phone') {
-            this.sendDataToActiveCampaign(); // background sync
-          }
-          
           this.processNextStep();
         }
       };
