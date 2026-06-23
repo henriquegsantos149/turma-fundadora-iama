@@ -366,20 +366,25 @@ class ChatbotApplication {
     this.flow = [
       {
         id: 'welcome',
-        botMessage: "Olá! Sou o agente virtual da Ambiental Pro responsável pela seleção da Turma Fundadora da Pós IA.MA. Para garantir que nossos alunos tenham o melhor aproveitamento, realizamos uma breve análise de perfil.",
+        botMessage: "Olá! Sou o agente de seleção da Ambiental Pro para a <strong>Turma Fundadora</strong> da Pós IA.MA — a primeira turma de uma pós-graduação pioneira em Inteligência Artificial aplicada ao meio ambiente no Brasil.",
         delay: 500
       },
       {
+        id: 'welcome2',
+        botMessage: "Por se tratar de uma turma histórica e com vagas estritamente limitadas, realizamos uma análise de perfil dos candidatos. Apenas os profissionais alinhados com os critérios da seleção serão convidados para a nossa <strong>live exclusiva</strong>, onde revelaremos todos os detalhes da Pós e a oferta especial de matrícula para Fundadores.",
+        delay: 1500
+      },
+      {
         id: 'name',
-        botMessage: "Vamos começar! Qual é o seu nome completo?",
+        botMessage: "Para começarmos, qual é o seu nome completo?",
         inputType: 'text',
-        placeholder: 'Digite seu nome...',
+        placeholder: 'Digite seu nome completo...',
         fieldId: 'firstName', // ActiveCampaign padrão (primeiro nome) mas enviaremos completo na variavel
-        delay: 800
+        delay: 1500
       },
       {
         id: 'email',
-        botMessage: "Prazer, {name}! Qual é o seu melhor e-mail para contato?",
+        botMessage: "Prazer, {name}! Qual é o seu melhor e-mail? É por ele que enviaremos o resultado da sua análise e, se selecionado(a), o link exclusivo para a live.",
         inputType: 'email',
         placeholder: 'exemplo@email.com',
         fieldId: 'email',
@@ -387,15 +392,15 @@ class ChatbotApplication {
       },
       {
         id: 'phone',
-        botMessage: "Ótimo. E qual é o seu WhatsApp (com DDD)?",
+        botMessage: "Perfeito. E qual é o seu WhatsApp com DDD? Também usaremos para enviar atualizações importantes sobre o processo de seleção. Atenção: digite apenas números.",
         inputType: 'tel',
-        placeholder: '11 99999-9999',
+        placeholder: '(99) 9 9999-9999',
         fieldId: 'phone',
         delay: 500
       },
       {
         id: 'graduacao',
-        botMessage: "Você já possui alguma formação de ensino superior completa?",
+        botMessage: "Agora, algumas perguntas sobre o seu perfil profissional. Você já possui formação de ensino superior completa?",
         inputType: 'buttons',
         options: ["Sim", "Não"],
         fieldId: '753', // UTM Possui Graduacao
@@ -403,7 +408,7 @@ class ChatbotApplication {
       },
       {
         id: 'area_formacao',
-        botMessage: "Qual é a sua área de formação principal?",
+        botMessage: "Qual é a sua área de formação?",
         inputType: 'text',
         placeholder: 'Ex: Engenharia Ambiental, Biologia, Direito...',
         fieldId: '754', // UTM Area de Formacao
@@ -412,7 +417,7 @@ class ChatbotApplication {
       },
       {
         id: 'q1',
-        botMessage: "Agora vamos entender sua experiência com tecnologia. Como você avalia o seu nível de conhecimento sobre IA?",
+        botMessage: "Agora, algumas perguntas sobre a sua relação com tecnologia e IA. Como você avalia o seu nível de conhecimento atual sobre Inteligência Artificial?",
         inputType: 'buttons',
         options: [
           "Nunca usei ferramentas de IA",
@@ -425,7 +430,7 @@ class ChatbotApplication {
       },
       {
         id: 'q2',
-        botMessage: "Interessante! Descreva brevemente como você usa a IA no seu dia a dia (ou como gostaria de usar).",
+        botMessage: "Interessante! Conte brevemente: como você usa IA hoje no seu trabalho ou como gostaria de usar?",
         inputType: 'textarea',
         placeholder: 'Escreva sua resposta...',
         fieldId: '792',
@@ -433,21 +438,22 @@ class ChatbotApplication {
       },
       {
         id: 'q3',
-        botMessage: "Qual é o seu principal objetivo profissional ao aplicar Inteligência Artificial? (Você pode selecionar mais de uma opção)",
+        botMessage: "Qual é o seu principal objetivo ao aplicar IA na sua carreira? Pode marcar mais de uma opção.",
         inputType: 'checkboxes',
         options: [
           "Otimizar relatórios ambientais",
           "Análise avançada de dados e mapas",
           "Desenvolver softwares e aplicativos com IA",
           "Criar minhas próprias automações do zero",
-          "Atualização de carreira"
+          "Atualização de carreira",
+          "Outro:"
         ],
         fieldId: '793',
         delay: 500
       },
       {
         id: 'q4',
-        botMessage: "Você lida frequentemente com grandes volumes de dados ou documentos complexos no seu trabalho (como PDFs longos, laudos, dados geoespaciais)?",
+        botMessage: "No seu trabalho, você costuma lidar com grandes volumes de dados ou documentos complexos como PDFs, laudos técnicos ou dados geoespaciais?",
         inputType: 'buttons',
         options: [
           "Sim, quase todos os dias",
@@ -459,7 +465,7 @@ class ChatbotApplication {
       },
       {
         id: 'q5',
-        botMessage: "Você já tentou automatizar alguma tarefa repetitiva no seu trabalho antes?",
+        botMessage: "Você já tentou automatizar alguma tarefa repetitiva no seu trabalho?",
         inputType: 'buttons',
         options: ["Sim", "Não"],
         fieldId: '795',
@@ -467,7 +473,7 @@ class ChatbotApplication {
       },
       {
         id: 'q6',
-        botMessage: "Como você acha que uma pós em Inteligência Artificial aplicada ao meio ambiente pode te ajudar na sua vida profissional?",
+        botMessage: "Na sua visão, como uma Pós-Graduação em Inteligência Artificial Aplicada ao Meio Ambiente pode transformar a sua carreira?",
         inputType: 'textarea',
         placeholder: 'Escreva sua resposta...',
         fieldId: '796',
@@ -475,7 +481,7 @@ class ChatbotApplication {
       },
       {
         id: 'q7',
-        botMessage: "O que você considera como a sua maior dificuldade ou desafio para adotar IA no trabalho hoje?",
+        botMessage: "Qual é o seu maior obstáculo hoje para começar a aplicar IA no seu trabalho?",
         inputType: 'textarea',
         placeholder: 'Escreva sua resposta...',
         fieldId: '797',
@@ -483,7 +489,7 @@ class ChatbotApplication {
       },
       {
         id: 'q8',
-        botMessage: "Por fim, quantas horas semanais você tem disponíveis para se dedicar aos estudos e construção de projetos na Pós?",
+        botMessage: "Última pergunta: quantas horas por semana você consegue dedicar aos estudos e projetos práticos?",
         inputType: 'buttons',
         options: ["Até 2 horas", "De 2 a 4 horas", "Mais de 4 horas"],
         fieldId: '798',
@@ -491,7 +497,7 @@ class ChatbotApplication {
       },
       {
         id: 'final',
-        botMessage: "Excelente, {name}! Já registramos o seu perfil. Nossa equipe pedagógica fará a análise e entraremos em contato via WhatsApp com os próximos passos. Você também será incluído(a) no nosso grupo VIP de WhatsApp para receber mais detalhes da Turma Fundadora.",
+        botMessage: "Obrigado, {name}! Suas respostas foram registradas e entrarão para a nossa análise de perfil. 🎯<br><br>Nossa equipe avaliará o seu perfil nos próximos dias. Se o seu perfil for selecionado, você receberá um convite exclusivo via e-mail e WhatsApp com o link de acesso à live da Turma Fundadora, onde revelaremos todos os detalhes da Pós e a condição especial de matrícula para os primeiros alunos.<br><br>Fique de olho no seu WhatsApp! 🚀",
         isFinal: true,
         delay: 1000
       }
@@ -696,14 +702,39 @@ class ChatbotApplication {
       }
 
       inputEl.addEventListener('input', () => {
+        if (stepData.inputType === 'tel') {
+          // Keep only digits and max 11 characters
+          let cleanVal = inputEl.value.replace(/\D/g, '');
+          if (cleanVal.length > 11) {
+            cleanVal = cleanVal.slice(0, 11);
+          }
+          inputEl.value = cleanVal;
+        }
         sendBtn.disabled = inputEl.value.trim().length === 0;
       });
 
       const submitAction = () => {
-        const val = inputEl.value.trim();
+        let val = inputEl.value.trim();
+        if (stepData.inputType === 'tel') {
+          val = val.replace(/\D/g, '');
+          if (val.length < 10) {
+            alert('Por favor, insira um WhatsApp válido com DDD (ex: 11999999999).');
+            return;
+          }
+        }
         if (val) {
           this.userData[stepData.fieldId] = val;
-          this.addUserMessage(val);
+          
+          let displayVal = val;
+          if (stepData.inputType === 'tel') {
+            if (val.length === 11) {
+              displayVal = `(${val.substring(0,2)}) ${val.substring(2,3)} ${val.substring(3,7)}-${val.substring(7)}`;
+            } else if (val.length === 10) {
+              displayVal = `(${val.substring(0,2)}) ${val.substring(2,6)}-${val.substring(6)}`;
+            }
+          }
+          
+          this.addUserMessage(displayVal);
           this.inputArea.innerHTML = ''; // clear input
           this.currentStep++;
           this.processNextStep();
@@ -744,12 +775,25 @@ class ChatbotApplication {
       });
 
     } else if (stepData.inputType === 'checkboxes') {
-      const checksHtml = stepData.options.map((opt, i) => `
-        <label class="chat-checkbox-label">
-          <input type="checkbox" class="chat-checkbox" value="${opt}" id="chk-${i}">
-          <span>${opt}</span>
-        </label>
-      `).join('');
+      const checksHtml = stepData.options.map((opt, i) => {
+        if (opt === 'Outro:') {
+          return `
+            <div class="chat-checkbox-outro-container" style="display: flex; flex-direction: column; width: 100%; gap: 8px;">
+              <label class="chat-checkbox-label">
+                <input type="checkbox" class="chat-checkbox" value="${opt}" id="chk-${i}">
+                <span>${opt}</span>
+              </label>
+              <input type="text" class="chat-input" id="outro-text-input" placeholder="Escreva aqui seu principal objetivo..." style="display: none; margin-top: 4px; width: 100%; box-sizing: border-box; background: #1F2023; border: 1px solid #444444; border-radius: 12px; padding: 10px 16px; outline: none; color: #fff;">
+            </div>
+          `;
+        }
+        return `
+          <label class="chat-checkbox-label">
+            <input type="checkbox" class="chat-checkbox" value="${opt}" id="chk-${i}">
+            <span>${opt}</span>
+          </label>
+        `;
+      }).join('');
       
       this.inputArea.innerHTML = `
         <div class="chat-options">
@@ -759,12 +803,47 @@ class ChatbotApplication {
       `;
 
       const confirmBtn = document.getElementById('chat-confirm-btn');
+      const outroCheckbox = this.inputArea.querySelector('input[value="Outro:"]');
+      const outroInput = document.getElementById('outro-text-input');
+
+      if (outroCheckbox && outroInput) {
+        outroCheckbox.addEventListener('change', () => {
+          if (outroCheckbox.checked) {
+            outroInput.style.display = 'block';
+            outroInput.focus();
+          } else {
+            outroInput.style.display = 'none';
+            outroInput.value = '';
+          }
+        });
+      }
+
       confirmBtn.addEventListener('click', () => {
-        const checked = Array.from(this.inputArea.querySelectorAll('.chat-checkbox:checked')).map(cb => cb.value);
+        const checked = [];
+        let hasOutro = false;
+        
+        this.inputArea.querySelectorAll('.chat-checkbox:checked').forEach(cb => {
+          if (cb.value === 'Outro:') {
+            hasOutro = true;
+          } else {
+            checked.push(cb.value);
+          }
+        });
+
+        if (hasOutro) {
+          const textVal = outroInput ? outroInput.value.trim() : '';
+          if (!textVal) {
+            alert('Por favor, especifique o seu objetivo no campo "Outro:".');
+            return;
+          }
+          checked.push(`Outro: ${textVal}`);
+        }
+
         if (checked.length > 0) {
           const val = checked.join(' || '); // ActiveCampaign múltipla escolha format
           this.userData[stepData.fieldId] = val;
-          this.addUserMessage(checked.join(', '));
+          const userMsgText = checked.map(item => item.startsWith('Outro: ') ? item.substring(7) : item).join(', ');
+          this.addUserMessage(userMsgText);
           this.inputArea.innerHTML = '';
           this.currentStep++;
           this.processNextStep();
@@ -794,7 +873,17 @@ class ChatbotApplication {
       this.addBotMessage(stepData.botMessage);
       
       if (stepData.isFinal) {
-        this.inputArea.innerHTML = '';
+        this.inputArea.innerHTML = `
+          <div class="chat-options">
+            <button class="chat-action-btn" id="chat-entendido-btn" style="width: 100%;">Entendido</button>
+          </div>
+        `;
+        const entendidoBtn = document.getElementById('chat-entendido-btn');
+        if (entendidoBtn) {
+          entendidoBtn.addEventListener('click', () => {
+            this.closeChatbot();
+          });
+        }
         await this.sendDataToActiveCampaign();
       } else if (!stepData.inputType) {
         // Just a bot message, go to next
