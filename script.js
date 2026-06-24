@@ -42,7 +42,7 @@ function initMobileMenu() {
 
   const toggleMenu = () => {
     const isOpen = navMenu.classList.toggle('open');
-    
+
     // Update icon
     if (typeof lucide !== 'undefined') {
       if (isOpen) {
@@ -212,7 +212,7 @@ function initCarousels() {
     const updateSlider = (withTransition = true) => {
       const slideWidth = originalSlides[0].getBoundingClientRect().width;
       const gap = 24; // grid gap in CSS
-      
+
       if (!withTransition) {
         track.style.transition = 'none';
         const offset = (currentIndex + cloneCount) * (slideWidth + gap);
@@ -261,7 +261,7 @@ function initCarousels() {
     track.addEventListener('transitionend', (e) => {
       if (e.propertyName !== 'transform') return;
       isTransitioning = false;
-      
+
       if (currentIndex >= originalSlides.length) {
         currentIndex = 0;
         updateSlider(false);
@@ -357,16 +357,16 @@ class ChatbotApplication {
     this.messagesContainer = document.getElementById('chatbot-messages');
     this.inputArea = document.getElementById('chatbot-input-area');
     this.triggers = document.querySelectorAll('.chatbot-trigger');
-    
+
     this.userData = {};
     this.currentStep = 0;
     this.isTyping = false;
-    
+
     // Configuração do fluxo de conversa
     this.flow = [
       {
         id: 'welcome',
-        botMessage: "Olá! Sou o agente de seleção da Ambiental Pro para a <strong>Turma Fundadora</strong> da Pós IA.MA — a primeira turma de uma pós-graduação pioneira em Inteligência Artificial aplicada ao meio ambiente no Brasil.",
+        botMessage: "Olá! Sou o agente de seleção da Ambiental Pro para a <strong>Turma Fundadora</strong> da Pós IA.MA — a primeira turma de uma pós-graduação pioneira em Inteligência Artificial aplicada ao Meio Ambiente no Brasil.",
         delay: 500
       },
       {
@@ -497,7 +497,7 @@ class ChatbotApplication {
       },
       {
         id: 'final',
-        botMessage: "Obrigado, {name}! Suas respostas foram registradas e entrarão para a nossa análise de perfil. 🎯<br><br>Nossa equipe avaliará o seu perfil nos próximos dias. Se o seu perfil for selecionado, você receberá um convite exclusivo via e-mail e WhatsApp com o link de acesso à live da Turma Fundadora, onde revelaremos todos os detalhes da Pós e a condição especial de matrícula para os primeiros alunos.<br><br>Fique de olho no seu WhatsApp! 🚀",
+        botMessage: "Obrigado, {name}! Suas respostas foram registradas e entrarão para a nossa análise de perfil. 🎯<br><br>Nossa equipe avaliará o seu perfil nos próximos dias. Se o seu perfil for selecionado, você receberá um convite exclusivo via e-mail e WhatsApp com o link de acesso à live da Turma Fundadora, onde revelaremos todos os detalhes da Pós e a condição especial de matrícula para os primeiros alunos.<br><br>Fique de olho no seu e-mail e WhatsApp! 🚀",
         isFinal: true,
         delay: 1000
       }
@@ -534,7 +534,7 @@ class ChatbotApplication {
       this.modal.style.pointerEvents = 'auto';
       this.modal.querySelector('.chatbot-container').style.transform = 'scale(1)';
     }, 10);
-    
+
     // Start flow if not started
     if (this.currentStep === 0 && this.messagesContainer.children.length === 0) {
       const savedState = this.restoreStateFromLocalStorage();
@@ -585,20 +585,20 @@ class ChatbotApplication {
 
   replayHistory() {
     this.messagesContainer.innerHTML = '';
-    
+
     // Loop through steps up to currentStep
     for (let i = 0; i < this.currentStep; i++) {
       const step = this.flow[i];
       if (!step) continue;
-      
+
       // Check condition (if it wasn't met, it was skipped, so we skip it in history too)
       if (step.condition && !step.condition(this.userData)) {
         continue;
       }
-      
+
       // Add bot message
       this.addBotMessage(step.botMessage);
-      
+
       // Add user message if inputType was present and answer exists
       if (step.inputType && step.fieldId) {
         const answer = this.userData[step.fieldId];
@@ -606,9 +606,9 @@ class ChatbotApplication {
           let displayVal = answer;
           if (step.inputType === 'tel') {
             if (answer.length === 11) {
-              displayVal = `(${answer.substring(0,2)}) ${answer.substring(2,3)} ${answer.substring(3,7)}-${answer.substring(7)}`;
+              displayVal = `(${answer.substring(0, 2)}) ${answer.substring(2, 3)} ${answer.substring(3, 7)}-${answer.substring(7)}`;
             } else if (answer.length === 10) {
-              displayVal = `(${answer.substring(0,2)}) ${answer.substring(2,6)}-${answer.substring(6)}`;
+              displayVal = `(${answer.substring(0, 2)}) ${answer.substring(2, 6)}-${answer.substring(6)}`;
             }
           } else if (step.inputType === 'checkboxes') {
             displayVal = answer.split(' || ').map(item => item.startsWith('Outro: ') ? item.substring(7) : item).join(', ');
@@ -617,7 +617,7 @@ class ChatbotApplication {
         }
       }
     }
-    
+
     // Resume flow
     this.processNextStep();
   }
@@ -634,11 +634,11 @@ class ChatbotApplication {
   getUTMs() {
     const params = new URLSearchParams(window.location.search);
     return {
-      '747': params.get('utm_campaign') || '',
-      '748': params.get('utm_source') || '',
-      '749': params.get('utm_medium') || '',
-      '750': params.get('utm_content') || '',
-      '751': params.get('utm_term') || '',
+      '747': params.get('L01PSIAMA_UTM_CAMPAIGN') || params.get('utm_campaign') || '',
+      '748': params.get('L01PSIAMA_UTM_SOURCE') || params.get('utm_source') || '',
+      '749': params.get('L01PSIAMA_UTM_MEDIUM') || params.get('utm_medium') || '',
+      '750': params.get('L01PSIAMA_UTM_CONTENT') || params.get('utm_content') || '',
+      '751': params.get('L01PSIAMA_UTM_TERM') || params.get('utm_term') || '',
       '789': new Date().toISOString()
     };
   }
@@ -699,8 +699,8 @@ class ChatbotApplication {
     const wrapper = document.querySelector('.chatbot-messages-wrapper');
     setTimeout(() => {
       wrapper.scrollTo({
-      top: wrapper.scrollHeight,
-      behavior: 'smooth'
+        top: wrapper.scrollHeight,
+        behavior: 'smooth'
       });
     }, 50);
   }
@@ -783,13 +783,13 @@ class ChatbotApplication {
 
   renderInputArea(stepData) {
     this.inputArea.innerHTML = '';
-    
+
     if (stepData.inputType === 'text' || stepData.inputType === 'email' || stepData.inputType === 'tel' || stepData.inputType === 'textarea') {
       const isTextarea = stepData.inputType === 'textarea';
-      const inputTag = isTextarea ? 
-        `<textarea class="chat-input" id="chat-input-field" placeholder="${stepData.placeholder}" rows="1"></textarea>` : 
+      const inputTag = isTextarea ?
+        `<textarea class="chat-input" id="chat-input-field" placeholder="${stepData.placeholder}" rows="1"></textarea>` :
         `<input type="${stepData.inputType}" class="chat-input" id="chat-input-field" placeholder="${stepData.placeholder}">`;
-        
+
       this.inputArea.innerHTML = `
         <div class="chat-input-wrapper">
           ${inputTag}
@@ -798,15 +798,15 @@ class ChatbotApplication {
           </button>
         </div>
       `;
-      
+
       if (typeof lucide !== 'undefined') lucide.createIcons();
 
       const inputEl = document.getElementById('chat-input-field');
       const sendBtn = document.getElementById('chat-send-btn');
-      
+
       // Auto-resize textarea
       if (isTextarea) {
-        inputEl.addEventListener('input', function() {
+        inputEl.addEventListener('input', function () {
           this.style.height = 'auto';
           this.style.height = (this.scrollHeight) + 'px';
         });
@@ -842,21 +842,21 @@ class ChatbotApplication {
         }
         if (val) {
           this.userData[stepData.fieldId] = val;
-          
+
           let displayVal = val;
           if (stepData.inputType === 'tel') {
             if (val.length === 11) {
-              displayVal = `(${val.substring(0,2)}) ${val.substring(2,3)} ${val.substring(3,7)}-${val.substring(7)}`;
+              displayVal = `(${val.substring(0, 2)}) ${val.substring(2, 3)} ${val.substring(3, 7)}-${val.substring(7)}`;
             } else if (val.length === 10) {
-              displayVal = `(${val.substring(0,2)}) ${val.substring(2,6)}-${val.substring(6)}`;
+              displayVal = `(${val.substring(0, 2)}) ${val.substring(2, 6)}-${val.substring(6)}`;
             }
           }
-          
+
           this.addUserMessage(displayVal);
           this.inputArea.innerHTML = ''; // clear input
           this.currentStep++;
           this.saveStateToLocalStorage();
-          
+
           this.processNextStep();
         }
       };
@@ -868,14 +868,14 @@ class ChatbotApplication {
           submitAction();
         }
       });
-      
+
       inputEl.focus();
 
     } else if (stepData.inputType === 'buttons') {
-      const btnsHtml = stepData.options.map(opt => 
+      const btnsHtml = stepData.options.map(opt =>
         `<button class="chat-option-btn">${opt}</button>`
       ).join('');
-      
+
       this.inputArea.innerHTML = `
         <div class="chat-options">
           ${btnsHtml}
@@ -915,7 +915,7 @@ class ChatbotApplication {
           </label>
         `;
       }).join('');
-      
+
       this.inputArea.innerHTML = `
         <div class="chat-options">
           ${checksHtml}
@@ -942,7 +942,7 @@ class ChatbotApplication {
       confirmBtn.addEventListener('click', () => {
         const checked = [];
         let hasOutro = false;
-        
+
         this.inputArea.querySelectorAll('.chat-checkbox:checked').forEach(cb => {
           if (cb.value === 'Outro:') {
             hasOutro = true;
@@ -989,19 +989,19 @@ class ChatbotApplication {
 
     // Is typing simulation
     const typingId = this.showTyping();
-    
+
     setTimeout(async () => {
       this.removeTyping(typingId);
-      
+
       if (stepData.isFinal) {
         const syncTypingId = this.showTyping();
         const success = await this.sendDataToActiveCampaign();
         this.removeTyping(syncTypingId);
-        
+
         if (success) {
           this.addBotMessage(stepData.botMessage);
           this.clearLocalStorageState();
-          
+
           this.inputArea.innerHTML = `
             <div class="chat-options">
               <button class="chat-action-btn" id="chat-entendido-btn" style="width: 100%;">Entendido</button>
@@ -1015,7 +1015,7 @@ class ChatbotApplication {
           }
         } else {
           this.addBotMessage("Desculpe, ocorreu uma falha de conexão e não conseguimos salvar as suas respostas. Por favor, verifique sua internet e tente enviar novamente.");
-          
+
           this.inputArea.innerHTML = `
             <div class="chat-options">
               <button class="chat-action-btn" id="chat-retry-btn" style="width: 100%;">Tentar Novamente</button>
@@ -1031,7 +1031,7 @@ class ChatbotApplication {
         }
       } else {
         this.addBotMessage(stepData.botMessage);
-        
+
         if (!stepData.inputType) {
           // Just a bot message, go to next
           this.currentStep++;
@@ -1051,9 +1051,9 @@ class ChatbotApplication {
 function initSmoothScroll() {
   const anchors = document.querySelectorAll('a[href^="#"]');
   anchors.forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
-      
+
       if (targetId === '#' || targetId === '') {
         e.preventDefault();
         window.scrollTo({
@@ -1062,7 +1062,7 @@ function initSmoothScroll() {
         });
         return;
       }
-      
+
       try {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
@@ -1083,7 +1083,7 @@ function initSmoothScroll() {
 function initStickyCTA() {
   const stickyCta = document.getElementById('sticky-cta');
   const heroSection = document.getElementById('hero');
-  
+
   if (!stickyCta || !heroSection) return;
 
   const observerOptions = {
