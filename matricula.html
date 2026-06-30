@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+  <!-- Redirect and Hide Checkout on July 4th or later -->
+  <script>
+    (function() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() + 1;
+      var date = now.getDate();
+      if ((month === 7 && date >= 4) || month > 7 || year > 2026) {
+        var style = document.createElement('style');
+        style.innerHTML = '.checkout-card, a[href*="sun.eduzz"], .sticky-timer-bar, .sales-timer-box { display: none !important; }';
+        document.head.appendChild(style);
+        window.location.href = 'https://ambientalpro.com.br';
+      }
+    })();
+  </script>
+
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
@@ -1314,6 +1329,15 @@
       if ((month === 6 && date === 30) || (month === 7 && date === 3)) {
         // Target is 23:59:59 of today
         targetTime = new Date(year, month - 1, date, 23, 59, 59).getTime();
+        
+        // Custom copy for June 30th
+        if (month === 6 && date === 30) {
+          const mainTitle = document.querySelector('.timer-title');
+          const stickyTitle = document.querySelector('.sticky-timer-text');
+          const customCopy = 'Aproveite a oferta e ganhe como bônus o Passaporte Ouro 2026, apenas até 23:59 de hoje!';
+          if (mainTitle && mainTitle.textContent !== customCopy) mainTitle.textContent = customCopy;
+          if (stickyTitle && stickyTitle.textContent !== customCopy) stickyTitle.textContent = customCopy;
+        }
       }
       
       const timerBox = document.getElementById('sales-timer-box');
